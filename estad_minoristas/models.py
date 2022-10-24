@@ -15,11 +15,11 @@ class N_Producto(models.Model):
     origen = models.CharField(name='Prod_Origen',max_length=20,null = True)
     unidad_menor = models.CharField(name='Prod_UnidadMenor',max_length=15,null = True)
     forma_traza = models.CharField(name='Prod_FormaTraza',max_length=20,null = True)
-    costo_inicial = MoneyField(name = 'Prod_CostoInicial',null = True)
-    costo_total = MoneyField(name = 'Prod_CostoTotal',null = True)
-    arancel = MoneyField(name='Prod_Arancel',null = True)
+    costo_inicial = MoneyField(max_digits=14,name = 'Prod_CostoInicial',null = True)
+    costo_total = MoneyField(max_digits=14,name = 'Prod_CostoTotal',null = True)
+    arancel = MoneyField(max_digits=14,name='Prod_Arancel',null = True)
     margen_distribucion = models.FloatField(name='Prod_MargenDistribucion',max_length=53,null = True)
-    precio_base = MoneyField(name='Prod_PrecioBase',null = True)
+    precio_base = MoneyField(max_digits=14,name='Prod_PrecioBase',null = True)
     dep_id_oltp = models.CharField(name='Dep_IdOLTP',max_length=12,null = True)
     dep_descripcion = models.CharField(name='Dep_Descripcion',max_length=255,null = True)
     seccion_id_oltp = models.CharField(name='Sec_IdOLTP',max_length=12,null = True)
@@ -31,9 +31,9 @@ class N_Producto(models.Model):
     suministrador_minorista = models.IntegerField(name='Prod_SuministradorMinorista',null = True)
     suministrador_id_oltp = models.CharField(name="Prod_SuministradorIdOLTP",max_length=20,null = True)
     suministrador_descripcion = models.CharField(name="Prod_SuministradorDescripcion",max_length=100,null = True)
-    volumen = MoneyField(name = 'Prod_Volumen',null = True)
+    volumen = MoneyField(max_digits=14,name = 'Prod_Volumen',null = True)
     unidad_volumen = models.CharField(name ='Prod_UnidadVolumen',max_length=20,null = True)
-    peso = MoneyField(name='Prod_Peso',null = True)
+    peso = MoneyField(max_digits=14,name='Prod_Peso',null = True)
     unidad_peso = models.CharField(name='Prod_UnidadPeso',max_length=20,null = True)
     mt_bandera_activo = models.CharField(name='MT_BanderaActivo',max_length=20,null = True)
 
@@ -84,7 +84,7 @@ class N_Proveedor(models.Model):
     tipo_mup =models.CharField(name='Prov_TipoMUP',max_length=100,null = True)
     organismo_mup =models.CharField(name='Prov_OrganismoMUP',max_length=50,null = True)
     tipo_mup_id_ods = models.IntegerField(name="Prov_TipoMUPIdODS",null = True)
-    mt_activo = models.BooleanField(name='MT_Activo',null = True,null = True)
+    mt_activo = models.BooleanField(name='MT_Activo',null = True)
     organismo_id = models.IntegerField(name='Organismo_IdOds',null=True)
     organismo_id_oltp = models.CharField(name='Organismo_IdOLTP',max_length=50,null=True)
     organismo_nombre = models.CharField(name='Organismo_Nombre',max_length=255,null=True)
@@ -128,19 +128,19 @@ class Ventas(models.Model):
 
     #attributes
     cantidad = models.FloatField(name='Venta_Cantidad',null = True)
-    costo = MoneyField(name='Venta_Costo',null = True)
-    importe = MoneyField(name='Venta_Importe',null = True)
+    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)
+    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)
     cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)
-    costo_prom = MoneyField(name='VentaProm_Costo',null = True)
-    importe_prom = MoneyField(name='VentaProm_Importe',null = True)
+    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)
+    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)
     cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)
-    costo_semestre = MoneyField(name='VentaSemestre_Costo',null = True)
-    importe_semestre = MoneyField(name='VentaSemestre_Importe',null = True)
+    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)
+    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)
     cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(name='VentaAnnoAnt_Costo',null = True)
-    importe_anno_anterior = MoneyField(name='VentaAnnoAnt_Importe',null = True)
-    costo_nacional= MoneyField(nale = 'Venta_Costo_Nacional',null = True)
-    importe_nacional_anno_ant = MoneyField(name = 'VentaAnnoAnt_Importe_Nacional',null = True) 
+    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)
+    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)
+    costo_nacional= MoneyField(max_digits=14,name = 'Venta_Costo_Nacional',null = True)
+    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) 
 
 class Compra(models.Model):
     #key
@@ -153,11 +153,11 @@ class Compra(models.Model):
 
     #attributes
     cantidad = models.FloatField(name='Compra_Cantidad',null = True)
-    costo = MoneyField(name='Compra_Costo',null = True) 
+    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True) 
     cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(name='CompraAnnoAnt_Costo',null = True)
-    costo_nacional= MoneyField(nale = 'Compra_Costo_Nacional',null = True)
-    costo_nacional_anno_ant = MoneyField(name = 'CompraAnnoAnt_Costo_Nacional',null = True)
+    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)
+    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)
+    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)
 
 class Inventario(models.Model):
     #key
@@ -170,21 +170,21 @@ class Inventario(models.Model):
 
     #attributes
     cantidad = models.FloatField(name='Inv_Cantidad,null = True')
-    costo = MoneyField(name='Inv_Costo',null = True)
+    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)
     cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
     dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)
     pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)
     cantinicial = models.IntegerField(name='InvInicial_Cantidad',null = True)
-    costo_inicial = MoneyField(name='InvInicial_Costo',null = True)
+    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)
     pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)
     mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)
-    mes_costo_prom = MoneyField(name= 'InvPromMes_Costo',null = True)
+    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)
     cant_prom = models.IntegerField(name= 'InvProm_Cantidad',null = True)
-    costo_prom = MoneyField(name= 'InvProm_Costo',null = True)
+    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)
     dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)
     uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)
     cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(name='InvAnnoAnt_Costo',null = True)
+    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)
 
 class Ajuste(models.Model):
     #key
@@ -197,11 +197,11 @@ class Ajuste(models.Model):
 
     #attributes
     cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)
-    costo = MoneyField(name ='Ajuste_Costo',null=True)
-    importe = MoneyField(name ='Ajuste_Importe',null=True)
+    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)
+    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)
     cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)
-    costo_anno_ant = MoneyField(name ='AjusteAnnoAnt_Costo',null=True)
-    importe_anno_ant = MoneyField(name ='AjusteAnnoAnt_Importe',null=True)
+    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)
+    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)
 
 class Transferencia(models.Model):
     #key
@@ -214,7 +214,7 @@ class Transferencia(models.Model):
     
     #attributes
     cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)
-    costo = MoneyField(name ='Transf_Costo',null=True)
+    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)
     cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)
-    costo_anno_ant = MoneyField(name ='TransfAnnoAnt_Costo',null=True)
+    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)
 
