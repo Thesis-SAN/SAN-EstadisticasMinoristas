@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djmoney',
+    'estad_minoristas',
+    'estad_minoristas.estado_comercializacion',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +85,13 @@ WSGI_APPLICATION = 'SAN.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ['POSTGRESQL_NAME'],
+        'USER' :  os.environ['POSTGRESQL_USER'],
+        'PASSWORD' : os.environ['POSTGRESQL_PASS'],
+        'HOST' : os.environ['POSTGRESQL_HOST'],
+        'PORT' : os.environ['POSTGRESQL_PORT'], 
+        
     }
 }
 
