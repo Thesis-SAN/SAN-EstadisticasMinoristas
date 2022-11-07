@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'djmoney',
     'estad_minoristas',
     'estad_minoristas.estado_comercializacion',
+    'usuarios',
+    'login',
+
+
 ]
 
 MIDDLEWARE = [
@@ -95,6 +99,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+
+    'evaluacion_desempeno.core.backends.ldap_login_backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
