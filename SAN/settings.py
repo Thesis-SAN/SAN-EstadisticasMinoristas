@@ -101,7 +101,7 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = (
 
-    'evaluacion_desempeno.core.backends.ldap_login_backend.LDAPBackend',
+    'core.backends.ldap_login_backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 
 )

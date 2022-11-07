@@ -23,4 +23,13 @@ class usuariosForm(forms.ModelForm):
     
     class Meta:
         model = Usuario
-        fields = ('usuario','password')
+        fields = ('','')
+
+        fields  = [
+                'usuario',
+                'password',
+        ]
+        widgets = {
+            'usuario': forms.TextInput(attrs={'class':'form-group'}),
+            'password': forms.TextInput(attrs={'class':'form-group','placeholder':'Password'}),
+        }
