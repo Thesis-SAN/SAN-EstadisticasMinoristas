@@ -62,7 +62,8 @@ License: You must have a valid license purchased only from themeforest(the above
 								<h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
 								<p class="opacity-40">Enter your details to login to your account:</p>
 							</div>
-							<form class="form" id="kt_login_signin_form" action="{{app_path}}" method="POST" id="login-form">
+							<!-- id="kt_login_signin_form" -->
+							<form class="form"  action="{{app_path}}" method="post" id="login-form">
 								{% csrf_token %}
 								<div class="form-group">
 									<input id="username"  class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Username" name="username" autocomplete="off" />

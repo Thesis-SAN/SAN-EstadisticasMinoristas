@@ -16,20 +16,17 @@ REDIRECT_FIELD_NAME = 'next'
 # Create your views here.
 def san_login_view(request,redirect_field_name = REDIRECT_FIELD_NAME):
     if request.method == "POST":
-        print('12')
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            print('is valid')
             login(request, form.get_user())
             return HttpResponseRedirect('/')
     else:
-        print(request.method)
         form = AuthenticationForm(request,'/')
 
 
     context = {
         'form': form,
-        #redirect_field_name: '/',
+         redirect_field_name: '/',
         'app_path' : request.get_full_path()
     }
     print("path",request.get_full_path())

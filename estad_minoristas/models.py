@@ -3,1037 +3,1343 @@ from pickle import TRUE
 from statistics import mode
 from tkinter.tix import Tree
 from django.db import models
-from djmoney.models.fields import MoneyField
 
 # Dimension tables
 class N_Producto(models.Model):
-    prod_id = models.IntegerField(name='Prod_Id',primary_key=True)
-    prod_IdSentai = models.CharField(name='Prod_IdSentai',max_length=20,null = True)
-    codigo_barra = models.CharField(name='Prod_CodigoBarra',max_length=40,null = True)
-    descripcion = models.CharField(name='Prod_Descripcion',max_length=200,null = True)
-    id_origen = models.IntegerField(name ='Prod_IdOrigen',null = True)
-    origen = models.CharField(name='Prod_Origen',max_length=20,null = True)
-    unidad_menor = models.CharField(name='Prod_UnidadMenor',max_length=15,null = True)
-    forma_traza = models.CharField(name='Prod_FormaTraza',max_length=20,null = True)
-    costo_inicial = MoneyField(max_digits=14,name = 'Prod_CostoInicial',null = True)
-    costo_total = MoneyField(max_digits=14,name = 'Prod_CostoTotal',null = True)
-    arancel = MoneyField(max_digits=14,name='Prod_Arancel',null = True)
-    margen_distribucion = models.FloatField(name='Prod_MargenDistribucion',max_length=53,null = True)
-    precio_base = MoneyField(max_digits=14,name='Prod_PrecioBase',null = True)
-    dep_id_oltp = models.CharField(name='Dep_IdOLTP',max_length=12,null = True)
-    dep_descripcion = models.CharField(name='Dep_Descripcion',max_length=255,null = True)
-    seccion_id_oltp = models.CharField(name='Sec_IdOLTP',max_length=12,null = True)
-    seccion_descripcion = models.CharField(name='Sec_Descripcion',max_length=255,null = True)
-    linea_id_oltp = models.CharField(name='Lin_IdOLTP',max_length=12,null = True)
-    linea_descripcion = models.CharField(name='Lin_Descripcion',max_length=255,null = True)
-    circular_mup = models.IntegerField(name='Prod_CircularMUP',null = True)
-    primera_circular_mup = models.CharField(name ='Prod_PrimeraCircularMUP',max_length=15,null = True)
-    suministrador_minorista = models.IntegerField(name='Prod_SuministradorMinorista',null = True)
-    suministrador_id_oltp = models.CharField(name="Prod_SuministradorIdOLTP",max_length=20,null = True)
-    suministrador_descripcion = models.CharField(name="Prod_SuministradorDescripcion",max_length=100,null = True)
-    volumen = MoneyField(max_digits=14,name = 'Prod_Volumen',null = True)
-    unidad_volumen = models.CharField(name ='Prod_UnidadVolumen',max_length=20,null = True)
-    peso = MoneyField(max_digits=14,name='Prod_Peso',null = True)
-    unidad_peso = models.CharField(name='Prod_UnidadPeso',max_length=20,null = True)
-    mt_bandera_activo = models.CharField(name='MT_BanderaActivo',max_length=20,null = True)
+    prod_id = models.IntegerField(name='prod_id',primary_key=True)
+    prod_rec_no = models.IntegerField(name = 'prod_recno',null=True)
+    prod_IdSentai = models.CharField(name='prod_id_sentai',max_length=20,null = True)
+    codigo_barra = models.CharField(name='prod_codigo_barra',max_length=40,null = True)
+    descripcion = models.TextField(name='prod_descripcion',max_length = 9999999,null = True)
+    id_origen = models.IntegerField(name ='prod_id_origen',null = True)
+    origen = models.CharField(name='prod_origen',max_length=20,null = True)
+    unidad_menor = models.CharField(name='prod_unidad_menor',max_length=15,null = True)
+    forma_traza = models.CharField(name='prod_forma_traza',max_length=20,null = True)
+    costo_inicial = models.FloatField(name = 'prod_costo_inicial',null = True)
+    costo_total = models.FloatField(name = 'prod_costo_total',null = True)
+    arancel = models.FloatField(name='prod_arancel',null = True)
+    margen_distribucion = models.FloatField(name='prod_margen_distribucion',max_length=53,null = True)
+    precio_base = models.FloatField(name='prod_precio_base',null = True)
+    dep_id_oltp = models.CharField(name='dep_id_oltp',max_length=12,null = True)
+    dep_descripcion = models.CharField(name='dep_descripcion',max_length=255,null = True)
+    seccion_id_oltp = models.CharField(name='sec_idoltp',max_length=12,null = True)
+    seccion_descripcion = models.CharField(name='sec_descripcion',max_length=255,null = True)
+    linea_id_oltp = models.CharField(name='lin_idoltp',max_length=12,null = True)
+    linea_descripcion = models.CharField(name='lin_descripcion',max_length=255,null = True)
+    circular_mup = models.IntegerField(name='prod_circular_mup',null = True)
+    primera_circular_mup = models.CharField(name ='prod_primera_circular_mup',max_length=15,null = True)
+    suministrador_minorista = models.IntegerField(name='prod_suministrador_minorista',null = True)
+    suministrador_id_oltp = models.CharField(name="prod_suministrador_id_oltp",max_length=20,null = True)
+    suministrador_descripcion = models.CharField(name="prod_suministrador_descripcion",max_length=100,null = True)
+    volumen = models.FloatField(name = 'prod_volumen',null = True)
+    unidad_volumen = models.CharField(name ='prod_unidad_volumen',max_length=20,null = True)
+    peso = models.FloatField(name='prod_peso',null = True)
+    unidad_peso = models.CharField(name='prod_unidad_peso',max_length=20,null = True)
+    mt_bandera_activo = models.CharField(name='mt_bandera_activo',max_length=20,null = True)
 
 class N_Establecimiento(models.Model):
-    est_id = models.IntegerField(name="Est_IdODS",primary_key=True)
-    codigo = models.CharField(name='Est_Codigo',max_length=50,null = True)
-    descripcion = models.CharField(name="Est_Descripcion",max_length=255,null = True)
-    codigo_estructurado = models.CharField(name='Est_CodigoEstructurado',max_length=50,null = True)
-    suc_id = models.IntegerField(name='Suc_IdODS',null = True)
-    suc_codigo = models.CharField(name='Suc_Codigo',max_length=2,null = True)
-    suc_nombre = models.CharField(name='Suc_Nombre',max_length=255,null = True)
-    comp_id = models.IntegerField(name='Comp_IdODS',null = True)
-    comp_codigo = models.CharField(name='Comp_Codigo',max_length=50,null = True)
-    comp_nombre  = models.CharField(name='Comp_Nombre',max_length=255,null = True)
-    es_interno =models.BooleanField(name='Est_EsInterno',null = True)
-    padre_id = models.IntegerField(name='Est_PadreIdODS',null = True)
-    padre_codigo = models.CharField(name='Est_PadreCodigo',max_length=50,null = True)
-    padre_descripcion = models.CharField(name='Est_PadreDescripcion',max_length=255,null = True)
-    nivel =models.IntegerField(name='Est_Nivel',null = True)
-    codigo_actividad = models.IntegerField(name='Est_ActividadCodigo',null = True)
-    actividad = models.CharField(name='Est_Actividad',max_length=255,null = True)
-    codigo_clasif_id = models.IntegerField(name='Est_ClasificacionCodigoId',null = True)
-    codigo_clasificacion = models.CharField(name= 'Est_ClasificacionCodigo',max_length=20,null = True)
-    clasificacion = models.CharField(name='Est_Clasificacion',max_length=255,null = True)
-    inv_sist_inf_codigo = models.CharField(name='Est_CodigoSistInformaticoInv',max_length=20,null = True)
-    sist_inv = models.CharField(name='Est_SistemaInventario',max_length=50,null = True)
-    es_dependiente = models.BooleanField(name='Est_EsDependiente',null = True)
-    dpa = models.CharField(name='Dpa',max_length=4,null = True)
-    cod_tipo_est_id = models.IntegerField(name='Est_TipoEstabCodigoId',null = True)
-    tipo_est_cod = models.CharField(name='Est_TipoEstabCodigo',max_length=20,null = True)
-    tipo_est = models.CharField(name='Est_TipoEstab' ,max_length=255,null = True)
-    mt_fecha_actualizacion = models.DateField(name= 'MT_FechaActualizacion',null = True)
-    path = models.CharField(name='Path',max_length=100,null = True)
-    mt_activo = models.BooleanField(name='MT_Activo',null = True)
-    sist_inv_id_ods = models.IntegerField(name='Est_SistemaInventarioIdOds',null = True)
-    sist_inv_nombre = models.CharField(name='Est_SistemaInventarioNombre',max_length=255,null = True)
+    est_id = models.IntegerField(name="est_id_ods",primary_key=True)
+    codigo = models.CharField(name='est_codigo',max_length=50,null = True)
+    descripcion = models.CharField(name="est_descripcion",max_length=255,null = True)
+    codigo_estructurado = models.CharField(name='est_codigo_estructurado',max_length=50,null = True)
+    suc_id = models.IntegerField(name='suc_id_ods',null = True)
+    suc_codigo = models.CharField(name='suc_codigo',max_length=2,null = True)
+    suc_nombre = models.CharField(name='suc_nombre',max_length=255,null = True)
+    comp_id = models.IntegerField(name='comp_id_ods',null = True)
+    comp_codigo = models.CharField(name='comp_codigo',max_length=50,null = True)
+    comp_nombre  = models.CharField(name='comp_nombre',max_length=255,null = True)
+    es_interno =models.BooleanField(name='est_es_interno',null = True)
+    padre_id = models.IntegerField(name='est_padre_id_ods',null = True)
+    padre_codigo = models.CharField(name='est_padre_codigo',max_length=50,null = True)
+    padre_descripcion = models.CharField(name='est_padre_descripcion',max_length=255,null = True)
+    nivel =models.IntegerField(name='est_nivel',null = True)
+    codigo_actividad = models.IntegerField(name='est_actividad_codigo',null = True)
+    actividad = models.CharField(name='est_actividad',max_length=255,null = True)
+    codigo_clasif_id = models.IntegerField(name='est_clasificacion_codigo_id',null = True)
+    codigo_clasificacion = models.CharField(name= 'est_clasificacion_codigo',max_length=20,null = True)
+    clasificacion = models.CharField(name='est_clasificacion',max_length=255,null = True)
+    inv_sist_inf_codigo = models.CharField(name='est_codigo_sist_informatico_inv',max_length=20,null = True)
+    sist_inv = models.CharField(name='est_sistema_inventario',max_length=50,null = True)
+    es_dependiente = models.BooleanField(name='est_es_dependiente',null = True)
+    dpa = models.CharField(name='dpa',max_length=4,null = True)
+    cod_tipo_est_id = models.IntegerField(name='est_tipo_estab_codigo_id',null = True)
+    tipo_est_cod = models.CharField(name='est_tipo_estab_codigo',max_length=20,null = True)
+    tipo_est = models.CharField(name='est_tipo_estab' ,max_length=255,null = True)
+    mt_fecha_actualizacion = models.DateField(name= 'mt_fecha_actualizacion',null = True)
+    path = models.CharField(name='path',max_length=100,null = True)
+    mt_activo = models.BooleanField(name='mt_activo',null = True)
+    sist_inv_id_ods = models.IntegerField(name='est_sistema_inventario_id_ods',null = True)
+    sist_inv_nombre = models.CharField(name='est_sistema_inventario_nombre',max_length=255,null = True)
 
 class N_Proveedor(models.Model):
-    prov_id = models.IntegerField(name='Prov_IdODS',primary_key=True)
-    prov_id_oltp = models.CharField(name= 'Prov_IdOLTP', max_length=20,null = True)
-    nombre = models.CharField(name='Prov_Nombre',max_length=255,null = True)
-    cod_panamericano = models.CharField(name='Prov_CodigoPanamericano',max_length=15,null = True)
-    organismo = models.CharField(name='Prov_Organismo',max_length=100,null = True)
-    tipo_id_ods = models.IntegerField(name='TipoProv_IdODS',null = True)
-    tipo_descripcion = models.CharField(name='TipoProv_Descripcion',max_length=30,null = True)
-    codigo_mup =models.CharField(name='Prov_CodigoMUP',max_length=15,null = True)
-    nombre_mup =models.CharField(name='Prov_NombreMUP',max_length=100,null = True)
-    tipo_mup =models.CharField(name='Prov_TipoMUP',max_length=100,null = True)
-    organismo_mup =models.CharField(name='Prov_OrganismoMUP',max_length=50,null = True)
-    tipo_mup_id_ods = models.IntegerField(name="Prov_TipoMUPIdODS",null = True)
-    mt_activo = models.BooleanField(name='MT_Activo',null = True)
-    organismo_id = models.IntegerField(name='Organismo_IdOds',null=True)
-    organismo_id_oltp = models.CharField(name='Organismo_IdOLTP',max_length=50,null=True)
-    organismo_nombre = models.CharField(name='Organismo_Nombre',max_length=255,null=True)
+    prov_id = models.IntegerField(name='prov_id_ods',primary_key=True)
+    prov_id_oltp = models.CharField(name= 'prov_id_oltp', max_length=20,null = True)
+    nombre = models.CharField(name='prov_nombre',max_length=255,null = True)
+    cod_panamericano = models.CharField(name='prov_codigo_panamericano',max_length=15,null = True)
+    organismo = models.CharField(name='prov_organismo',max_length=100,null = True)
+    tipo_id_ods = models.IntegerField(name='tipo_prov_id_ods',null = True)
+    tipo_descripcion = models.CharField(name='tipo_prov_descripcion',max_length=255,null = True)
+    codigo_mup =models.CharField(name='prov_codigo_mup',max_length=15,null = True)
+    nombre_mup =models.CharField(name='prov_nombre_mup',max_length=100,null = True)
+    tipo_mup =models.CharField(name='prov_tipo_mup',max_length=100,null = True)
+    organismo_mup =models.CharField(name='prov_organismo_mup',max_length=50,null = True)
+    tipo_mup_id_ods = models.IntegerField(name="prov_tipo_mup_id_ods",null = True)
+    mt_activo = models.BooleanField(name='mt_activo',null = True)
+    organismo_id = models.IntegerField(name='organismo_id_ods',null=True)
+    organismo_id_oltp = models.CharField(name='organismo_id_oltp',max_length=50,null=True)
+    organismo_nombre = models.CharField(name='organismo_nombre',max_length=255,null=True)
 
 class N_Periodo(models.Model):
-    periodo_id = models.IntegerField(name='Periodo_IdODS')
-    descripcion =models.CharField(name='Periodo_Descripcion',max_length=200, null=True)
-    fecha_inicio = models.DateField(name='Periodo_FechaInicio',null=True)
-    fecha_fin = models.DateField(name='Periodo_FechaFin',null=True)
+    periodo_id = models.IntegerField(name='periodo_id_ods',primary_key = True)
+    descripcion =models.CharField(name='periodo_descripcion',max_length=200, null=True)
+    fecha_inicio = models.DateField(name='periodo_fecha_inicio',null=True)
+    fecha_fin = models.DateField(name='periodo_fecha_fin',null=True)
  
 class N_Actividad(models.Model):
-    act_cod= models.CharField(name='Act_Codigo',primary_key=True,max_length=2)
-    descripcion = models.CharField(name='Act_Descripcion',max_length=255,null=True)
+    act_cod= models.CharField(name='act_codigo',primary_key=True,max_length=2)
+    descripcion = models.CharField(name='act_descripcion',max_length=255,null=True)
 
 class N_TipoArea(models.Model):
-    tipo_area_id = models.IntegerField(name='TipoArea_Id',primary_key=True)
-    nombre = models.CharField(name='TipoArea_Nombre',max_length=50,null=True)
+    tipo_area_id = models.IntegerField(name='tipo_area_id',primary_key=True)
+    nombre = models.CharField(name='tipo_area_nombre',max_length=50,null=True)
 
 class N_Familia(models.Model):
-    fam_id = models.CharField(name='Fam_IdOLTP',max_length=10,null=True)
-    linea_id = models.CharField(name='Lin_IdOLTP',max_length=10,null=True)
-    seccion_id = models.CharField(name='Sec_IdOLTP',max_length=10,null=True)
-    dep_id = models.CharField(name='Dep_IdOLTP',max_length=10,null=True)
-    linea_descrip = models.CharField(name='Lin_Descripcion',max_length=255,null=True)
-    seccion_descrip = models.CharField(name='Sec_Descripcion',max_length=255,null=True)
-    dep_descrip = models.CharField(name='Dep_Descripcion',max_length=255,null=True)
-    nivel = models.IntegerField(name='Fam_Nivel')
-    ind_one_id= models.IntegerField(name='IndONE_Id',null=True)
-    is_deleted = models.BooleanField(name='IsDeleted',null=True)
+    fam_id = models.CharField(name='fam_id_oltp',max_length=10,null=True)
+    linea_id = models.CharField(name='lin_id_oltp',max_length=10,null=True)
+    seccion_id = models.CharField(name='sec_id_oltp',max_length=10,null=True)
+    dep_id = models.CharField(name='dep_id_oltp',max_length=10,null=True)
+    linea_descrip = models.CharField(name='lin_descripcion',max_length=255,null=True)
+    seccion_descrip = models.CharField(name='sec_descripcion',max_length=255,null=True)
+    dep_descrip = models.CharField(name='dep_descripcion',max_length=255,null=True)
+    nivel = models.IntegerField(name='fam_nivel')
+    ind_one_id= models.IntegerField(name='ind_one_Id',null=True)
+    is_deleted = models.BooleanField(name='is_deleted',null=True)
+
+class N_TipoCodigo(models.Model):
+    tipo_cod_id = models.IntegerField(name= "tipo_cod_id",primary_key=True)	 
+    tipo_cod_descripcion =models.CharField(name='tipo_cod_descripcion',max_length= 100)	
 
 
 #Fact tables
 class Ventas_Producto_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete= models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)
-    costo_nacional= MoneyField(max_digits=14,name = 'Venta_Costo_Nacional',null = True)
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) 
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) 
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_prod_est')
+        ]
 
 class Compra_Producto_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True) 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_prod_est')
+        ]
 
 class Inventario_Producto_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE, default = 1)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)
-    cantinicial = models.IntegerField(name='InvInicial_Cantidad',null = True)
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo_id','tipo_cod_id'],name= 'inv_prod_est')
+        ]
 
 class Ajuste_Producto_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_est')
+        ]
+
 
 class Transferencia_Producto_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_prod_est')
+        ]
 
 ###Aggregations###
 
 #Producto_Sucursal
 class Ventas_Producto_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True) 
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_prod_suc')
+        ]
 
 class Compra_Producto_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_prod_suc')
+        ]
 
 class Inventario_Producto_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_prod_suc')
+        ]
 
 class Ajuste_Producto_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_suc')
+        ]
 
 class Transferencia_Producto_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
-
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_prod_suc')
+        ]
 
 #Producto_Complejo
 class Ventas_Producto_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_prod_complejo')
+        ]
 
 class Compra_Producto_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_prod_complejo')
+        ]
 
 class Inventario_Producto_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_prod_complejo')
+        ]
 
 class Ajuste_Producto_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_complejo')
+        ]
 
 class Transferencia_Producto_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_prod_complejo')
+        ]
 
 #Linea_Establecimiento
 class Ventas_Linea_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_prod')
+        ]
 
 class Compra_Linea_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_prod')
+        ]
 
 class Inventario_Linea_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_prod')
+        ]
 
 class Ajuste_Linea_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_prod')
+        ]
 
 class Transferencia_Linea_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_prod')
+        ]
 
 
 #Linea_Complejo
 class Ventas_Linea_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_complejo')
+        ]
 
 class Compra_Linea_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_complejo')
+        ]
 
 class Inventario_Linea_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_complejo')
+        ]
 
 class Ajuste_Linea_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_complejo')
+        ]
 
 class Transferencia_Linea_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf__linea_complejo')
+        ]
 
 
 #Linea_Sucursal
 class Ventas_Linea_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_sucursal')
+        ]
 
 class Compra_Linea_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_sucursal')
+        ]
 
 class Inventario_Linea_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_sucursal')
+        ]
 
 class Ajuste_Linea_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_sucursal')
+        ]
 
 class Transferencia_Linea_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_sucursal')
+        ]
 
 
 #Departamento_Establecimiento
 class Ventas_Departamento_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_est')
+        ]
 
 class Compra_Departamento_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_est')
+        ]
 
 class Inventario_Departamento_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_est')
+        ]
 
 class Ajuste_Departamento_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_est')
+        ]
 
 class Transferencia_Departamento_Establecimiento(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_est')
+        ]
 
 #Departamento_Complejo
 class Ventas_Departamento_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional =  models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_complejo')
+        ]
 
 class Compra_Departamento_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_complejo')
+        ]
 
 class Inventario_Departamento_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_complejo')
+        ]
 
 class Ajuste_Departamento_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo =   models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant =   models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_complejo')
+        ]
 
 class Transferencia_Departamento_Complejo(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_complejo')
+        ]
 
 
 #Departamento_Sucursal
 class Ventas_Departamento_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Venta_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Venta_Costo',null = True)#
-    importe = MoneyField(max_digits=14,name='Venta_Importe',null = True)#
-    cantidad_prom = models.FloatField(name='VentaProm_Cantidad',null = True)#
-    costo_prom = MoneyField(max_digits=14,name='VentaProm_Costo',null = True)#
-    importe_prom = MoneyField(max_digits=14,name='VentaProm_Importe',null = True)#
-    cant_semestre = models.FloatField(name='VentaSemestre_Cantidad',null = True)#
-    costo_semestre = MoneyField(max_digits=14,name='VentaSemestre_Costo',null = True)#
-    importe_semestre = MoneyField(max_digits=14,name='VentaSemestre_Importe',null = True)#
-    cant_anno_anterior = models.FloatField(name='VentaAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Costo',null = True)#
-    importe_anno_anterior = MoneyField(max_digits=14,name='VentaAnnoAnt_Importe',null = True)#
-    importe_nacional = MoneyField(max_digits=14,name = 'Venta_Importe_Nacional',null = True) #
-    importe_nacional_anno_ant = MoneyField(max_digits=14,name = 'VentaAnnoAnt_Importe_Nacional',null = True) #
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_sucursal')
+        ]
 
 class Compra_Departamento_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Compra_Cantidad',null = True)#
-    costo = MoneyField(max_digits=14,name='Compra_Costo',null = True)# 
-    cant_anno_anterior = models.FloatField(name='CompraAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='CompraAnnoAnt_Costo',null = True)#
-    costo_nacional= MoneyField(max_digits=14,name = 'Compra_Costo_Nacional',null = True)#
-    costo_nacional_anno_ant = MoneyField(max_digits=14,name = 'CompraAnnoAnt_Costo_Nacional',null = True)#
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_sucursal')
+        ]
 
 class Inventario_Departamento_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Inv_Cantidad,null = True')#
-    costo = MoneyField(max_digits=14,name='Inv_Costo',null = True)#
-    cant_prom = models.FloatField(name = 'InvProm_Cantidad',null = True)
-    dias_existencia = models.IntegerField(name='Inv_DiasExistencia',null = True)#
-    pot_dias_existencia = models.IntegerField(name='Inv_PotenciasDiasExistencia',null = True)#
-    cant_inicial = models.IntegerField(name='InvInicial_Cantidad',null = True)#
-    costo_inicial = MoneyField(max_digits=14,name='InvInicial_Costo',null = True)#
-    mes_cant_prom = models.IntegerField( name='InvPromMes_Cantidad',null = True)#
-    mes_costo_prom = MoneyField(max_digits=14,name= 'InvPromMes_Costo',null = True)#
-    cant_prom = models.FloatField(name= 'InvProm_Cantidad',null = True,max_length=53)#
-    costo_prom = MoneyField(max_digits=14,name= 'InvProm_Costo',null = True)#
-    dias_existencia_semestre = models.IntegerField(name='InvSemestre_DiasExistencia',null = True)#
-    uso_semestre= models.FloatField(name='InvSemestre_Uso',null = True)#
-    cant_anno_anterior = models.FloatField(name='InvAnnoAnt_Cantidad',null = True)#
-    costo_anno_anterior = MoneyField(max_digits=14,name='InvAnnoAnt_Costo',null = True)#
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_sucursal')
+        ]
 
 class Ajuste_Departamento_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
-    cantidad = models.FloatField(name='Ajuste_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Ajuste_Costo',null=True)#
-    importe = MoneyField(max_digits=14,name ='Ajuste_Importe',null=True)#
-    cantidad_anno_ant = models.FloatField(name='AjusteAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Costo',null=True)#
-    importe_anno_ant = MoneyField(max_digits=14,name ='AjusteAnnoAnt_Importe',null=True)#
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_sucursal')
+        ]
 
 class Transferencia_Departamento_Sucursal(models.Model):
     #key
-    prod_id = models.IntegerField(name = 'Prod_Id',primary_key=True)
-    est_id = models.IntegerField(name='Est_Id',unique=True)
-    prov_id = models.IntegerField(name = 'Prov_Id',unique=True)
-    periodo_id = models.IntegerField(name= 'Periodo_Id',unique=True)
-    act_id = models.IntegerField(name='Act_Id', unique=True)
-    area_tipo_codigo = models.IntegerField(name='AreaTipo_Id',unique=True)
+    
+    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
     
     #attributes
-    cantidad = models.FloatField(name='Transf_Cantidad',max_length=53,null=True)#
-    costo = MoneyField(max_digits=14,name ='Transf_Costo',null=True)#
-    cantidad_anno_ant = models.FloatField(name='TransfAnnoAnt_Cantidad',max_length=53)#
-    costo_anno_ant = MoneyField(max_digits=14,name ='TransfAnnoAnt_Costo',null=True)#
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_sucursal')
+        ]
 
 
