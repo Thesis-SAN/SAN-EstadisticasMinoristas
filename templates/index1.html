@@ -238,17 +238,15 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Subheader-->
 						<div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
-							{% block subheader %}
-								<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-									<!--begin::Info-->
-									
-										<!--
-											SUBHEADER
-										-->
-
-									<!--end::Toolbar-->
-								</div>
-							{% endblock subheader %}
+							<div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+								<!--begin::Info-->
+								{% block subheader %}
+									<!--
+										SUBHEADER
+									-->
+								{% endblock subheader %}
+								<!--end::Toolbar-->
+							</div>
 						</div>
 						<!--end::Subheader-->
 						<!--begin::Entry-->
