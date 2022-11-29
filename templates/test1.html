@@ -1,476 +1,501 @@
 {% extends "index1.html" %}
 
+{% block tittle %} Estado de la Comercialización {% endblock %}
+
+{% block subheader %} <h3 class="display3display4 lv">Estado de la Comercialización</h3> {% endblock %}
+
 {%block main_container%}
 
 <!--begin::Row( testing checkbox)-->
 <div class="row">
-
-    <form class="form" action="{{app_path}}" name = "nivel-detalle" method = "post">
-        
-        {% csrf_token %}
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card card-custom card-stretch example example-compact">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Nivel Detallado</h3>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="radio-list">
-                        <label class="radio radio-rounded">
-                            <input type="radio" checked="checked"  name="selected_nivel_detalle" value="Departamento"/>
-                            <span></span>
-                            Departamento
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio"  name="selected_nivel_detalle" value="Sección"/>
-                            <span></span>
-                            Sección
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Línea"/>
-                            <span></span>
-                            Línea
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Producto"/>
-                            <span></span>
-                            Producto
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio"name="selected_nivel_detalle" value="Proveedor"/>
-                            <span></span>
-                            Proveedor
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Sucursal"/>
-                            <span></span>
-                            Sucursal
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Complejo"/>
-                            <span></span>
-                            Complejo
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Estab. Independiente"/>
-                            <span></span>
-                            Estab. Independiente
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Estab. Dependiente"/>
-                            <span></span>
-                            Estab. Dependiente
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Período"/>
-                            <span></span>
-                            Período
-                        </label>
-                        <label class="radio radio-rounded">
-                            <input type="radio" name="selected_nivel_detalle" value="Sist. Informático"/>
-                            <span></span>
-                            Sist. Informático
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="col-lg-4">
-            <div class="card card-custom card-stretch example example-compact">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Totales</h3>
-                    </div>  
-                </div>
-                <div class="card-body">
-                    <select id="kt_dual_listbox_4" class="dual-listbox" data-search="false" multiple="multiple">
-                        <option value="1">Departamento</option>
-                        <option value="2">Sección</option>
-                        <option value="3">Línea</option>
-                        <option value="4">Producto</option>
-                        <option value="5">Proveedor</option>
-                        <option value="6">Sucursal</option>
-                        <option value="7">Complejo</option>
-                        <option value="8">Estab. Independiente</option>
-                        <option value="9">Estab. Dependiente</option>
-                        <option value="10">Período</option>
-                        <option value="11">Sist. Informático</option>
-                    </select>
-                        <ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#example_code_4_html">HTML</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#example_code_4_js">JS</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="example_code_4_html" role="tabpanel">
-                                <div class="example-highlight">
-                                    <pre>
-                                        <code class="language-html">
-                                            &lt;select id="kt_dual_listbox_4" class="dual-listbox" data-search="false" multiple&gt;
-                                            &lt;option value="1"&gt;One&lt;/option&gt;
-                                            &lt;option value="2"&gt;Two&lt;/option&gt;
-                                            &lt;option value="3"&gt;Three&lt;/option&gt;
-                                            &lt;option value="4"&gt;Four&lt;/option&gt;
-                                            &lt;option value="5"&gt;Five&lt;/option&gt;
-                                            &lt;option value="6"&gt;Six&lt;/option&gt;
-                                            &lt;option value="7"&gt;Seven&lt;/option&gt;
-                                            &lt;option value="8"&gt;Eight&lt;/option&gt;
-                                            &lt;option value="9"&gt;Nine&lt;/option&gt;
-                                            &lt;option value="10"&gt;Ten&lt;/option&gt;
-                                            &lt;/select&gt;
-                                        </code>
-                                    </pre>
+    <div class="column">
+        <div class="row col-lg-12">
+            <form class="form" action="{{app_path}}" name = "nivel-detalle" method = "post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-custom card-stretch example example-compact">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3 class="card-label">Nivel Detallado</h3>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="example_code_4_js">
-                                <div class="example-highlight">
-                                    <pre style="height:400px">
-                                        <code class="language-js">
-                                            // Class definition
-                                            var KTDualListbox = function() {
-                                                // Private functions
-                                                var demo4 = function () {
-                                                // Dual Listbox
-                                                var $this = $('#kt_dual_listbox_4');
-                                        
-                                                // get options
-                                                var options = [];
-                                                $this.children('option').each(function () {
-                                                    var value = $(this).val();
-                                                    var label = $(this).text();
-                                                    options.push({
-                                                    text: label,
-                                                    value: value
-                                                });
-                                            });
-                                    
-                                            // init dual listbox
-                                            var dualListBox = new DualListbox($this.get(0), {
-                                                addEvent: function (value) {
-                                                console.log(value);
-                                                },
-                                                removeEvent: function (value) {
-                                                console.log(value);
-                                                },
-                                                availableTitle: 'Available options',
-                                                selectedTitle: 'Selected options',
-                                                addButtonText: 'Add',
-                                                removeButtonText: 'Remove',
-                                                addAllButtonText: 'Add All',
-                                                removeAllButtonText: 'Remove All',
-                                                options: options,
-                                            });
-                                    
-                                            // hide search
-                                            dualListBox.search.classList.add('dual-listbox__search--hidden');
-                                            };
-                
-                                                return {
-                                                    // public functions
-                                                    init: function() {
-                                                        demo4();
-                                                    },
-                                                };
-                                            }();
-                
-                                            jQuery(document).ready(function() {
-                                                KTDualListbox.init();
-                                            });
-                                        </code>
-                                    </pre>
+                            <div class="form-group card-body pt-4">
+                                <div class="radio-list">
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" checked="checked"  name="selected_nivel_detalle" value="Departamento"/>
+                                        <span></span>
+                                        Departamento
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio"  name="selected_nivel_detalle" value="Sección"/>
+                                        <span></span>
+                                        Sección
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Línea"/>
+                                        <span></span>
+                                        Línea
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Producto"/>
+                                        <span></span>
+                                        Producto
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio"name="selected_nivel_detalle" value="Proveedor"/>
+                                        <span></span>
+                                        Proveedor
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Sucursal"/>
+                                        <span></span>
+                                        Sucursal
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Complejo"/>
+                                        <span></span>
+                                        Complejo
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Estab. Independiente"/>
+                                        <span></span>
+                                        Estab. Independiente
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Estab. Dependiente"/>
+                                        <span></span>
+                                        Estab. Dependiente
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Período"/>
+                                        <span></span>
+                                        Período
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Sist. Informático"/>
+                                        <span></span>
+                                        Sist. Informático
+                                    </label>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="form-group col-lg-4">
+                        <div class="card card-custom card-stretch example example-compact">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3 class="card-label">Ruptura</h3>
+                                </div>
+                            </div>
+                            <div class="checkbox-list card-body pt-4">
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_ruptura"  value="Departamento" />
+                                <span></span>Departamento</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"   name="selected_ruptura" value="Sección" />
+                                <span></span>Sección</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Línea"/>
+                                <span></span>Línea</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Producto" />
+                                <span></span>Producto</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Proveedor"/>
+                                <span></span>Proveedor</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Sucursal"/>
+                                <span></span>Sucursal</label>
+                                
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Complejo"/>
+                                <span></span>Complejo</label>
+                                    
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento Independiente"/>
+                                <span></span>Estab. Independiente</label>
+                                
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_ruptura" value="Establecimiento Dependiente"/>
+                                <span></span>Estab. Dependiente</label>
+                                
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_ruptura" value="Período"/>
+                                <span></span>Período</label>
+                                
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_ruptura" value="Sistema Informático"/>
+                                <span></span>Sist. Informático</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <div class="card card-custom card-stretch example example-compact">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3 class="card-label">Indicadores a mostrar</h3>
+                                </div>
+                            </div>
+                            <div class="checkbox-list  card-body pt-4">
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_indicadores"  value="venta_cantidad" />
+                                <span></span>Venta cantidad</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"   name="selected_indicadores" value="venta_costo" />
+                                <span></span>Venta costo</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="venta_importe"/>
+                                <span></span>Venta Importe</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="compra_cantidad" />
+                                <span></span>Compra cantidad</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="compra_costo"/>
+                                <span></span>Compra costo</label>
+
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="inventario_inicial_costo"/>
+                                <span></span>Inventario inicial(costo)</label>
+                                
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="inventario_costo"/>
+                                <span></span>Inventario costo</label>
+                                    
+                                <label class="checkbox">
+                                <input type="checkbox"  name="selected_indicadores" value="porciento_de_variacion_de_saldo"/>
+                                <span></span>Porciento de variacion de saldo</label>
+                                
+                            </div>
+                        </div>
                     </div> 
+
+                </div>
+                <!-- submit btn -->
+                <input class="btn btn-primary mt-4 ml-4 mr-4 mb-4" type="submit" value="Aceptar" name="submit-nivel-detalle">
+            </form>
+        </div>
+        <div class="card-body pt-4 example-preview card col-lg-12 ">
+            <!--begin::Example-->
+            <div class="example">
+                <div>
+                    <ul class="nav nav-tabs nav-tabs-line nav-boldest">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Generales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Familia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4">Entidades</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-5" id="myTabContent">
+                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
+                            <div class="column">
+                                <div class="row">
+                                    <div class="row card-body pt-0 pl-1 pr-4" style="padding-bottom: .25rem;"> <!-- Periodo-->
+                                        <div class="card-body example-preview" style="padding: 1rem 1rem;">
+                                            <h5> Período </h5>
+                                            <div class="row radio-list">
+                                                <label class="radio radio-rounded col-lg-5">
+                                                    <input type="radio" checked="checked" name="seleccionar_periodo" value="Período" />
+                                                    <span></span>
+                                                    Período
+                                                </label>
+                                                <label class="radio radio-rounded col-lg-5">
+                                                    <input type="radio" name="seleccionar_periodo" value="Acumulado" />
+                                                    <span></span>
+                                                    Acumulado
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0 pl-1 pr-1" style="padding-bottom: .25rem;"> <!-- Area Minorista -->
+                                        <div class="column example-preview" style="padding: 1rem 1rem;">
+                                            <div>
+                                                <h5>Área Minorista</h5>
+                                            </div>
+                                            <div class="checkbox-list card-body pt-4">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="CUP" />
+                                                    <span></span>
+                                                    CUP
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="MLC" />
+                                                    <span></span>
+                                                    MLC
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="TODOS" />
+                                                    <span></span>
+                                                    TODOS
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0 pl-1 pr-1" style="padding-bottom: .25rem;"> <!-- Origen de productos -->
+                                        <div class="card-body example-preview" style="padding: 1rem 1rem;">
+                                            <h5>Origen de productos</h5>
+                                            <div class="checkbox-list card-body pt-4">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="CUP" />
+                                                    <span></span>
+                                                    Desconocido
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="MLC" />
+                                                    <span></span>
+                                                    Nacional
+                                                </label>
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="select_divisa" value="TODOS" />
+                                                    <span></span>
+                                                    Importado
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row" style="border:fixed;">
+                                    <div class="row card-body pt-0 pl-1 pr-1 col-8" style="padding-bottom: .25rem;"> <!-- Actividad -->
+                                        <div class="card-body example-preview">
+                                            <h5>Actividad</h5>
+                                            <div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row card-body pt-0 pr-4"  style="padding-bottom: .25rem;"> <!-- Tipo de codigo -->
+                                        <div class="card-body example-preview">
+                                            <h5>Tipo de código</h5>
+                                            <div class="row radio-list">
+                                                <label class="radio radio-rounded col-lg-5">
+                                                    <input type="radio" checked="checked" name="seleccionar_periodo" value="Período" />
+                                                    <span></span>
+                                                    TODOS
+                                                </label>
+                                                <label class="radio radio-rounded col-lg-5">
+                                                    <input type="radio" name="seleccionar_periodo" value="Acumulado" />
+                                                    <span></span>
+                                                    MUP
+                                                </label>
+                                                <label class="radio radio-rounded col-lg-5">
+                                                    <input type="radio" name="seleccionar_periodo" value="Acumulado" />
+                                                    <span></span>
+                                                    Ocasión
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Codigos de Productos -->
+                                    <div class="column">
+                                        <div class="row card-body pt-0 pl-0 pr-1" style="padding-bottom: .25rem;"> <!-- Rango de código -->
+                                            <div class="card-body example-preview">
+                                                <h5>Rango de código</h5>
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                    </div>
+                                                    <input class="form-control" type="text" value="" id="rango_codigo" placeholder="Ejemplo: Código1, Código1, Código2, Código5-Código8"/>
+                                                </div>
+                                                <h5>Cargar Código desde Fichero</h5>
+                                                <div class="form-group">
+                                                    <div></div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="navegador_carga_fichero" />
+                                                        <label class="custom-file-label" for="navegador_carga_fichero"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Filtrar" id="filtrar_familia"/>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-primary">Departamento</button>
+                                <button type="button" class="btn btn-primary">Línea</button>
+                                <button type="button" class="btn btn-primary">Secciones</button>
+                            </div>
+                            <div>
+                                <!--
+                                    canvas
+                                -->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+                            <div class="column">
+                                <div class="form-group">
+                                    <label for="agrupacion_codificacion">Agrupado por:</label>
+                                    <select class="form-control" id="agrupacion_codificacion">
+                                        <option>Codificación Minorista</option>
+                                        <option>Codificación Mayorista</option>
+                                        <option>Organismos</option>
+                                    </select>
+                                </div>
+                                <div class="checkbox-list card-body pt-4">
+                                    <label class="checkbox">
+                                    <input type="checkbox" name="ocultar_inactivos_cb"  value="Ocultar inactivos" />
+                                    <span></span>Ocultar inactivos</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Filtrar" id="filtrar_familia" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <!--
+                                        canvas
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_4">
+                            <div class="row">
+                                <div class="radio-list">
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" checked="checked" name="selected_nivel_detalle" value="Departamento" />
+                                        <span></span>
+                                        Establecimientos
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_nivel_detalle" value="Sección" />
+                                        <span></span>
+                                        Sist. Informático
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group pt-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Filtrar" id="filtrar_familia" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                                canvas
+                            -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card card-custom card-stretch example example-compact">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Datos a Visualizar</h3>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <select id="kt_dual_listbox_4" class="dual-listbox" data-search="false" multiple="multiple">
-                        <option value="1">Venta cantidad</option>
-                        <option value="2">Venta costo</option>
-                        <option value="3">Venta Importe</option>
-                        <option value="4">Compra cantidad</option>
-                        <option value="5">Compra costo</option>
-                        <option value="6">Inventario inicial(costo)</option>
-                        <option value="7">Inventario costo</option>
-                        <option value="8">Porciento de variacion de saldo</option>
-                    </select>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="form-group col-lg-4">
-            <div class="checkbox-list">
-                <label class="checkbox">
-                <input type="checkbox" name="selected_nivel_detalle"  value="Departamento" />
-                <span></span>Departamento</label>
-
-                <label class="checkbox">
-                <input type="checkbox"   name="selected_nivel_detalle" value="Sección" />
-                <span></span>Sección</label>
-
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Línea"/>
-                <span></span>Línea</label>
-
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Producto" />
-                <span></span>Producto</label>
-
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Proveedor"/>
-                <span></span>Proveedor</label>
-
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Sucursal"/>
-                <span></span>Sucursal</label>
-                
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Complejo"/>
-                <span></span>Complejo</label>
-                    
-                <label class="checkbox">
-                <input type="checkbox"  name="selected_nivel_detalle" value="Establecimiento Independiente"/>
-                <span></span>Estab. Independiente</label>
-                
-                <label class="checkbox">
-                <input type="checkbox" name="selected_nivel_detalle" value="Establecimiento Dependiente"/>
-                <span></span>Estab. Dependiente</label>
-                
-                <label class="checkbox">
-                <input type="checkbox" name="selected_nivel_detalle" value="Período"/>
-                <span></span>Período</label>
-                
-                <label class="checkbox">
-                <input type="checkbox" name="selected_nivel_detalle" value="Sistema Informático"/>
-                <span></span>Sist. Informático</label>
-
-            </div>
-
-        </div>  -->
-        
-        <div class="form-group col-lg-4">
-            <div class="card card-custom card-stretch example example-compact">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Ruptura</h3>
-                    </div>
-                </div>
-                <div class="checkbox-list">
-                    <label class="checkbox">
-                    <input type="checkbox" name="selected_ruptura"  value="Departamento" />
-                    <span></span>Departamento</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"   name="selected_ruptura" value="Sección" />
-                    <span></span>Sección</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Línea"/>
-                    <span></span>Línea</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Producto" />
-                    <span></span>Producto</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Proveedor"/>
-                    <span></span>Proveedor</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Sucursal"/>
-                    <span></span>Sucursal</label>
-                    
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Complejo"/>
-                    <span></span>Complejo</label>
-                        
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_ruptura" value="Establecimiento Independiente"/>
-                    <span></span>Estab. Independiente</label>
-                    
-                    <label class="checkbox">
-                    <input type="checkbox" name="selected_ruptura" value="Establecimiento Dependiente"/>
-                    <span></span>Estab. Dependiente</label>
-                    
-                    <label class="checkbox">
-                    <input type="checkbox" name="selected_ruptura" value="Período"/>
-                    <span></span>Período</label>
-                    
-                    <label class="checkbox">
-                    <input type="checkbox" name="selected_ruptura" value="Sistema Informático"/>
-                    <span></span>Sist. Informático</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group col-lg-4">
-            <div class="card card-custom card-stretch example example-compact">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Indicadores a mostrar</h3>
-                    </div>
-                </div>
-                <div class="checkbox-list">
-                    <label class="checkbox">
-                    <input type="checkbox" name="selected_indicadores"  value="venta_cantidad" />
-                    <span></span>Venta cantidad</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"   name="selected_indicadores" value="venta_costo" />
-                    <span></span>Venta costo</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="venta_importe"/>
-                    <span></span>Venta Importe</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="compra_cantidad" />
-                    <span></span>Compra cantidad</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="compra_costo"/>
-                    <span></span>Compra costo</label>
-
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="inventario_inicial_costo"/>
-                    <span></span>Inventario inicial(costo)</label>
-                    
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="inventario_costo"/>
-                    <span></span>Inventario costo</label>
-                        
-                    <label class="checkbox">
-                    <input type="checkbox"  name="selected_indicadores" value="porciento_de_variacion_de_saldo"/>
-                    <span></span>Porciento de variacion de saldo</label>
-                    
-                </div>
-            </div>
-        </div> 
-
     </div>
-
-    <input type="submit" value="Submit" name="submit-nivel-detalle">
-
-    </form>
-
-
-    <div class="col-lg-6 col-xxl-4">
+    <!-- Conformación de Reporte -->
+    <div class="col-lg-4">
         <!--begin::List Widget 9-->
         <div class="card card-custom card-stretch gutter-b">
             <!--begin::Header-->
-            <div class="col-lg-6 col-xxl-4">
+            <div class="">
                 <!--begin::List Widget 9-->
                 <div class="card card-custom card-stretch gutter-b">
-                    
+
                     <!--begin::Header-->
-                    <div class="card-header align-items-center border-0 mt-4">
-                        <h3 class="card-title align-items-start flex-column">
+                    <div class="card-header align-items-center border-0">
+                        <h3 class="card-title align-items-start ">
                             <span class="font-weight-bolder text-dark">Conformar reporte</span>
                         </h3>
                     </div>
                     <!--end::Header-->
 
-                    
+
                     <!--begin::Body-->
-                    <div class="card-body pt-4">
-                        <!--begin::Timeline-->
-                        <div class="timeline timeline-6 mt-3">
-
-                           
-
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">Nivel de detalle</div>
-                                <br>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-success icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Content-->
-                                {% for checkbox in selected_checkboxes_nivel_detalle%}
-                                <div class="timeline-content d-flex">
-                                    <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">
-                                        {{checkbox}}
-                                    </span>
-                                </div>
-                                {% endfor %}
-                                <!--end::Content-->
+                    <div class="card-body">
+                        <div> <!-- Nivel de detalle -->
+                            <div>
+                                <h5>Nivel de detalle</h5>
                             </div>
-                            <!--end::Item-->
-
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">Ruptura</div>
-                                <br>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-success icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Content-->
-                                {% for checkbox in selected_checkboxes_ruptura%}
-                                <div class="timeline-content d-flex">
-                                    <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">
+                            
+                            <div id="kt_tree_1" class="tree-demo">
+                                <ul>
+                                    {% for checkbox in selected_checkboxes_nivel_detalle%}
+                                    <li>
                                         {{checkbox}}
-                                    </span>
-                                </div>
-                                {% endfor %}
-                                <!--end::Content-->
+                                    </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-                            <!--end::Item-->
-
-                            <!--begin::Item-->
-                            <div class="timeline-item align-items-start">
-                                <!--begin::Label-->
-                                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg">Indicadores</div>
-                                <br>
-                                <!--end::Label-->
-                                <!--begin::Badge-->
-                                <div class="timeline-badge">
-                                    <i class="fa fa-genderless text-success icon-xl"></i>
-                                </div>
-                                <!--end::Badge-->
-                                <!--begin::Content-->
-                                {% for checkbox in selected_checkboxes_indicadores%}
-                                <div class="timeline-content d-flex">
-                                    <span class="font-weight-bolder text-dark-75 pl-3 font-size-lg">
-                                        {{checkbox}}
-                                    </span>
-                                </div>
-                                {% endfor %}
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Item-->
-
-
                         </div>
-                        <!--end::Timeline-->
+
+                        <div>
+                            <!-- Nivel de detalle -->
+                            <div>
+                                <h5>Nivel de Ruptura</h5>
+                            </div>
+                        
+                            <div id="kt_tree_1" class="tree-demo">
+                                <ul>
+                                    {% if selected_checkboxes_ruptura %}
+                                        {% for checkbox in selected_checkboxes_ruptura%}
+                                        <li>
+                                            {{checkbox}}
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <!-- Nivel de detalle -->
+                            <div>
+                                <h5>Indicadores</h5>
+                            </div>
+                        
+                            <div id="kt_tree_1" class="tree-demo">
+                                <ul>
+                                    {% if selected_checkboxes_indicadores %}
+                                        {% for checkbox in selected_checkboxes_indicadores%}
+                                        <li>
+                                            {{checkbox}}
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <!--end: Card Body-->
                 </div>
                 <!--end: List Widget 9-->
             </div>
         </div>
-    </div>        
-
+    </div>
 </div>
 
 {%endblock main_container%}
