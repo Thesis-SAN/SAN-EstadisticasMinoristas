@@ -104,7 +104,7 @@ class N_TipoArea(models.Model):
     nombre = models.CharField(name='tipo_area_nombre',max_length=50,null=True)
 
 class N_Familia(models.Model):
-    fam_id = models.CharField(name='fam_id_oltp',max_length=10,null=True)
+    fam_id = models.CharField(name='fam_id_oltp',max_length=10, primary_key=True, default = '')
     linea_id = models.CharField(name='lin_id_oltp',max_length=10,null=True)
     seccion_id = models.CharField(name='sec_id_oltp',max_length=10,null=True)
     dep_id = models.CharField(name='dep_id_oltp',max_length=10,null=True)
@@ -232,7 +232,6 @@ class Ajuste_Producto_Establecimiento(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_est')
         ]
-
 
 class Transferencia_Producto_Establecimiento(models.Model):
     #key
@@ -530,7 +529,7 @@ class Transferencia_Producto_Complejo(models.Model):
 class Ventas_Linea_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -556,13 +555,13 @@ class Ventas_Linea_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_prod')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_prod')
         ]
 
 class Compra_Linea_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -580,13 +579,13 @@ class Compra_Linea_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_prod')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_prod')
         ]
 
 class Inventario_Linea_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -613,13 +612,13 @@ class Inventario_Linea_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_prod')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_prod')
         ]
 
 class Ajuste_Linea_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -638,13 +637,13 @@ class Ajuste_Linea_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_prod')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_prod')
         ]
 
 class Transferencia_Linea_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -660,7 +659,7 @@ class Transferencia_Linea_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_prod')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_prod')
         ]
 
 
@@ -668,7 +667,7 @@ class Transferencia_Linea_Establecimiento(models.Model):
 class Ventas_Linea_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -694,13 +693,13 @@ class Ventas_Linea_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_complejo')
         ]
 
 class Compra_Linea_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -718,13 +717,13 @@ class Compra_Linea_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_complejo')
         ]
 
 class Inventario_Linea_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -750,13 +749,13 @@ class Inventario_Linea_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_complejo')
         ]
 
 class Ajuste_Linea_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -774,13 +773,13 @@ class Ajuste_Linea_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_complejo')
         ]
 
 class Transferencia_Linea_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -796,7 +795,7 @@ class Transferencia_Linea_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf__linea_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf__linea_complejo')
         ]
 
 
@@ -804,7 +803,7 @@ class Transferencia_Linea_Complejo(models.Model):
 class Ventas_Linea_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -830,13 +829,13 @@ class Ventas_Linea_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_sucursal')
         ]
 
 class Compra_Linea_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -854,13 +853,13 @@ class Compra_Linea_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_sucursal')
         ]
 
 class Inventario_Linea_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -886,13 +885,13 @@ class Inventario_Linea_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_sucursal')
         ]
 
 class Ajuste_Linea_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -910,13 +909,13 @@ class Ajuste_Linea_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_sucursal')
         ]
 
 class Transferencia_Linea_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -932,7 +931,7 @@ class Transferencia_Linea_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_sucursal')
         ]
 
 
@@ -940,7 +939,7 @@ class Transferencia_Linea_Sucursal(models.Model):
 class Ventas_Departamento_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -966,13 +965,13 @@ class Ventas_Departamento_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_est')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_est')
         ]
 
 class Compra_Departamento_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -990,13 +989,13 @@ class Compra_Departamento_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_est')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_est')
         ]
 
 class Inventario_Departamento_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1022,13 +1021,13 @@ class Inventario_Departamento_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_est')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_est')
         ]
 
 class Ajuste_Departamento_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1046,13 +1045,13 @@ class Ajuste_Departamento_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_est')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_est')
         ]
 
 class Transferencia_Departamento_Establecimiento(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1068,14 +1067,14 @@ class Transferencia_Departamento_Establecimiento(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_est')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_est')
         ]
 
 #Departamento_Complejo
 class Ventas_Departamento_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1101,13 +1100,13 @@ class Ventas_Departamento_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_complejo')
         ]
 
 class Compra_Departamento_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1125,13 +1124,13 @@ class Compra_Departamento_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_complejo')
         ]
 
 class Inventario_Departamento_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1157,13 +1156,13 @@ class Inventario_Departamento_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_complejo')
         ]
 
 class Ajuste_Departamento_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1181,13 +1180,13 @@ class Ajuste_Departamento_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_complejo')
         ]
 
 class Transferencia_Departamento_Complejo(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1203,7 +1202,7 @@ class Transferencia_Departamento_Complejo(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_complejo')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_complejo')
         ]
 
 
@@ -1211,7 +1210,7 @@ class Transferencia_Departamento_Complejo(models.Model):
 class Ventas_Departamento_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1237,13 +1236,13 @@ class Ventas_Departamento_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_sucursal')
         ]
 
 class Compra_Departamento_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1261,13 +1260,13 @@ class Compra_Departamento_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_sucursal')
         ]
 
 class Inventario_Departamento_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1293,13 +1292,13 @@ class Inventario_Departamento_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_sucursal')
         ]
 
 class Ajuste_Departamento_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1317,13 +1316,13 @@ class Ajuste_Departamento_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_sucursal')
         ]
 
 class Transferencia_Departamento_Sucursal(models.Model):
     #key
     
-    prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
     est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
@@ -1339,7 +1338,417 @@ class Transferencia_Departamento_Sucursal(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_sucursal')
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_sucursal')
+        ]
+
+
+#Seccion_Establecimiento
+class Ventas_Seccion_Establecimiento(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_prod')
+        ]
+
+class Compra_Seccion_Establecimiento(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_prod')
+        ]
+
+class Inventario_Seccion_Establecimiento(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+
+    #attributes
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_prod')
+        ]
+
+class Ajuste_Seccion_Establecimiento(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+
+    #attributes
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_prod')
+        ]
+
+class Transferencia_Seccion_Establecimiento(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+    
+    #attributes
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccion_prod')
+        ]
+
+
+#Seccion_Complejo
+class Ventas_Seccion_Complejo(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_complejo')
+        ]
+
+class Compra_Seccion_Complejo(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_complejo')
+        ]
+
+class Inventario_Seccion_Complejo(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_complejo')
+        ]
+
+class Ajuste_Seccion_Complejo(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_complejo')
+        ]
+
+class Transferencia_Seccion_Complejo(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+    
+    #attributes
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccioncomplejo')
+        ]
+
+
+#Seccion_Sucursal
+class Ventas_Seccion_Sucursal(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='venta_cantidad',null = True)
+    costo = models.FloatField(name='venta_costo',null = True)
+    importe = models.FloatField(name='venta_importe',null = True)
+    cantidad_prom = models.FloatField(name='venta_prom_cantidad',null = True)
+    costo_prom = models.FloatField(name='venta_prom_costo',null = True)
+    importe_prom = models.FloatField(name='venta_prom_importe',null = True)
+    cant_semestre = models.FloatField(name='venta_semestre_cantidad',null = True)
+    costo_semestre = models.FloatField(name='venta_semestre_costo',null = True)
+    importe_semestre = models.FloatField(name='venta_semestre_importe',null = True)
+    cant_anno_anterior = models.FloatField(name='venta_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='venta_anno_ant_costo',null = True)
+    importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
+    importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
+    importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_sucursal')
+        ]
+
+class Compra_Seccion_Sucursal(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='compra_cantidad',null = True)
+    costo = models.FloatField(name='compra_costo',null = True) 
+    cant_anno_anterior = models.FloatField(name='compra_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
+    costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
+    costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_sucursal')
+        ]
+
+class Inventario_Seccion_Sucursal(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='inv_cantidad',null = True)
+    costo = models.FloatField(name='inv_costo',null = True)
+    dias_existencia = models.IntegerField(name='inv_dias_existencia',null = True)
+    pot_dias_existencia = models.IntegerField(name='inv_potencias_dias_existencia',null = True)
+    cant_inicial = models.IntegerField(name='inv_inicial_cantidad',null = True)
+    costo_inicial = models.FloatField(name='inv_inicial_costo',null = True)
+    mes_cant_prom = models.IntegerField( name='inv_prom_mes_cantidad',null = True)
+    mes_costo_prom = models.FloatField(name= 'inv_prom_mes_costo',null = True)
+    cant_prom = models.FloatField(name= 'inv_prom_cantidad',null = True,max_length=53)
+    costo_prom = models.FloatField(name= 'inv_prom_costo',null = True)
+    dias_existencia_semestre = models.IntegerField(name='inv_semestre_dias_existencia',null = True)
+    uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
+    cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
+    costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_sucursal')
+        ]
+
+class Ajuste_Seccion_Sucursal(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+
+    #attributes
+    cantidad = models.FloatField(name='ajuste_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='ajuste_costo',null=True)
+    importe = models.FloatField(name ='ajuste_importe',null=True)
+    cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
+    importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_sucursal')
+        ]
+
+class Transferencia_Seccion_Sucursal(models.Model):
+    #key
+    
+    fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
+    est_id = models.ForeignKey(N_Establecimiento,name='est_id',on_delete=models.CASCADE)
+    prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
+    periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
+    act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
+    
+    #attributes
+    cantidad = models.FloatField(name='transf_cantidad',max_length=53,null=True)
+    costo = models.FloatField(name ='transf_costo',null=True)
+    cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
+    costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccion_sucursal')
         ]
 
 
