@@ -41,7 +41,9 @@ License: You must have a valid license purchased only from themeforest(the above
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
+	{% block body_class %}
 	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+		{% endblock %}
 		<!--begin::Main-->
 		<!--begin::Header Mobile-->
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
@@ -85,7 +87,9 @@ License: You must have a valid license purchased only from themeforest(the above
 			<!--begin::Page-->
 			<div class="d-flex flex-row flex-column-fluid page">
 				<!--begin::Aside-->
+				{% block aside_class %}
 				<div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
+					{% endblock %}
 					<!--begin::Brand-->
 					<div class="brand flex-column-auto" id="kt_brand">
 						<!--begin::Logo-->
@@ -252,7 +256,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						<!--begin::Entry-->
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
-							<div class="container">
+							{% block container_class %}<div class="container">{% endblock %}
 								{% block main_container %}
 									
 									<!-- MAIN CONTAINER -->
