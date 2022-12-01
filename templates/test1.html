@@ -52,14 +52,18 @@
                                 <label class="checkbox">
                                     <input type="checkbox" name="selected_metricas" value="compra_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Compra costo</label>
+                                
+                                <label class="checkbox">
+                                    <input type="checkbox" name="selected_metricas" value="inv_cantidad" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
+                                    <span></span>Inventario cantidad</label>    
 
                                 <h5>Inventario</h5>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="inventario_inicial_costo"  onchange="mostrar_elemento(this, 'mostrar_metricas')"/>
+                                    <input type="checkbox" name="selected_metricas" value="inv_inicial_costo"  onchange="mostrar_elemento(this, 'mostrar_metricas')"/>
                                     <span></span>Inventario inicial(costo)</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="inventario_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
+                                    <input type="checkbox" name="selected_metricas" value="inv_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Inventario costo</label>
                             </div>
                         </div>
@@ -169,43 +173,43 @@
                             </div>
                             <div class="checkbox-list card-body pt-4 pl-6 pr-6">
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura"  value="Departamento"  onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox" name="selected_totales"  value="Departamento"  onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Departamento</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"   name="selected_ruptura" value="Sección" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
+                                <input type="checkbox"   name="selected_totales" value="Sección" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
                                 <span></span>Sección</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Línea" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox"  name="selected_totales" value="Línea" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Línea</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Producto" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
+                                <input type="checkbox"  name="selected_totales" value="Producto" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
                                 <span></span>Producto</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Proveedor" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox"  name="selected_totales" value="Proveedor" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Proveedor</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Sucursal" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox"  name="selected_totales" value="Sucursal" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Sucursal</label>
                                 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Complejo" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox"  name="selected_totales" value="Complejo" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Complejo</label>
                                     
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox"  name="selected_totales" value="Establecimiento" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Establecimiento</label>
                                  
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura" value="Período" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
+                                <input type="checkbox" name="selected_totales" value="Período" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Período</label>
                                 
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura" value="Sistema Informático" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
+                                <input type="checkbox" name="selected_totales" value="Sistema Informático" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                 <span></span>Sist. Informático</label>
                             </div>
                         </div>
@@ -307,7 +311,12 @@
                                             <div class="card-body example-preview">
                                                 <h5>Actividad</h5>
                                                 <div>
-                                                
+                                                {% if actividades %}
+                                                   {% for act in actividades %}
+                                                        {{act.act_codigo}} - {{act.act_descripcion }}
+                                                        <br>
+                                                   {% endfor %}
+                                                {% endif %}
                                                 </div>
                                             </div>
                                         </div>

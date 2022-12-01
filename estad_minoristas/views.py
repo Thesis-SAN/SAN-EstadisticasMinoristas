@@ -16,10 +16,11 @@ def login(request):
     return render(request, 'login.html')
 
 def report(request):
+    print("entre enla vista")
     if request.method == "POST":
         nivel_detallado = request.POST.getlist("selected_nivel_detalle")
-        totales = request.POST.getlist("selected_ruptura")
-        metricas = request.POST.getlist("selected_indicadores")
+        totales = request.POST.getlist("selected_totales")
+        metricas = request.POST.getlist("selected_metricas")
         print('nivel de detalle', nivel_detallado)
         procesos_seleccionadas = build_select(metricas)# diccionario proceso--> lista de metrica(ej. compra->[compra cant, compra_costo])
         models = []
@@ -37,8 +38,6 @@ def report(request):
 
         context = {
             'app_path' : request.get_full_path(),
-            'selected_checkboxes_nivel_detalle' : nivel_detallado,
-            'selected_checkboxes_ruptura' : totales,
             'metricas' : metricas,
             'table' : queries,
             'detalle' : nivel_detallado[0],
@@ -49,11 +48,15 @@ def report(request):
 
     else:
         pass
+
     
+    actividades = N_Actividad.objects.all()
+    print(actividades)
     context = {
-        'app_path' : request.get_full_path()
+        'app_path' : request.get_full_path(),
+        'actividades' : actividades,
     }
-    return TemplateResponse(request, 'test1.html')
+    return TemplateResponse(request, 'test1.html',context)
 
 
 def  test_table(request):
