@@ -17,12 +17,14 @@ def test(request):
     if request.method == "POST":
         selected_list_nivel_detalle = request.POST.getlist("selected_nivel_detalle")
         selected_list_ruptura= request.POST.getlist("selected_ruptura")
+        selected_list_metricas = request.POST.getlist("selected_metricas")
         selected_list_indicadores = request.POST.getlist("selected_indicadores")
         context ={
             'app_path' : request.get_full_path(),
             'selected_checkboxes_nivel_detalle' : selected_list_nivel_detalle,
             'selected_checkboxes_ruptura' : selected_list_ruptura,
             'selected_checkboxes_indicadores' : selected_list_indicadores,
+            'selected_checkboxes_metricas' : selected_list_metricas,
         }
         return TemplateResponse(request, 'test1.html', context)
 
