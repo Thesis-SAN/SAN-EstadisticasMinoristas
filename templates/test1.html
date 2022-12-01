@@ -28,8 +28,8 @@
                             </div>
                             <div class="checkbox-list card-body pt-4  pl-6 pr-6">
                                 <h5>Venta</h5>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="venta_cantidad" />
+                                <label class="checkbox" onclick="mostrar_elemento(this, 'mostrar_indicadores', 'venta_cant',' Venta Cantidad')" >
+                                    <input type="checkbox" name="selected_metricas" value="venta_cantidad"/>
                                     <span></span>Venta cantidad</label>
 
                                 <label class="checkbox">
@@ -141,14 +141,9 @@
                                         Complejo
                                     </label>
                                     <label class="radio radio-rounded">
-                                        <input type="radio" name="selected_nivel_detalle" value="Estab. Independiente"/>
+                                        <input type="radio" name="selected_nivel_detalle" value="Establecimiento"/>
                                         <span></span>
-                                        Estab. Independiente
-                                    </label>
-                                    <label class="radio radio-rounded">
-                                        <input type="radio" name="selected_nivel_detalle" value="Estab. Dependiente"/>
-                                        <span></span>
-                                        Estab. Dependiente
+                                        Establecimiento
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Período"/>
@@ -202,13 +197,9 @@
                                 <span></span>Complejo</label>
                                     
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento Independiente"/>
-                                <span></span>Estab. Independiente</label>
-                                
-                                <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura" value="Establecimiento Dependiente"/>
-                                <span></span>Estab. Dependiente</label>
-                                
+                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento"/>
+                                <span></span>Establecimiento</label>
+                                 
                                 <label class="checkbox">
                                 <input type="checkbox" name="selected_ruptura" value="Período"/>
                                 <span></span>Período</label>
@@ -248,7 +239,7 @@
                                                 <h5> Período </h5>
                                                 <div class="row radio-list">
                                                     <label class="radio radio-rounded col-lg-5">
-                                                        <input type="radio" checked="checked" name="seleccionar_periodo" value="Período" />
+                                                        <input type="radio" checked="checked" name="seleccionar_periodo" value="Período" id="seleccionar_periodo_periodo"/>
                                                         <span></span>
                                                         Período
                                                     </label>
@@ -460,7 +451,7 @@
                         <!--begin::Header-->
                         <div class="card-header align-items-center border-0">
                             <h3 class="card-title align-items-start ">
-                                <span class="font-weight-bolder text-dark">Estructora del reporte</span>
+                                <span class="font-weight-bolder text-dark">Estructura del reporte</span>
                             </h3>
                             <input class="btn btn-primary mt-4 ml-4 mr-4 mb-4" type="submit" value="Conformar Reporte" name="submit-nivel-detalle">
                         </div>
@@ -513,19 +504,40 @@
                             <div>
                                 <!-- Nivel de detalle -->
                                 <div>
-                                    <h5>Indicadores</h5>
+                                    <h5>Métricas</h5>
                                 </div>
                             
                                 <div id="kt_tree_1" class="tree-demo">
-                                    <ul id="mostrar_indicadores">
-                                        {% if selected_checkboxes_indicadores %}
-                                            {% for checkbox in selected_checkboxes_indicadores%}
+                                    <ul id="mostrar_metricas">
+                                        {% if selected_checkboxes_metricas %}
+                                            {% for checkbox in selected_checkboxes_metricas%}
                                             <li>
                                                 {{checkbox}}
                                             </li>
                                             {% endfor %}
                                         {% else %}
                                             Todos
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <!-- Nivel de detalle -->
+                                <div>
+                                    <h5>Indicadores</h5>
+                                </div>
+                            
+                                <div id="kt_tree_1" class="tree-demo">
+                                    <ul id="mostrar_indicadores">
+                                        {% if selected_checkboxes_indicadores %}
+                                        {% for checkbox in selected_checkboxes_indicadores%}
+                                        <li>
+                                            {{checkbox}}
+                                        </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        Todos
                                         {% endif %}
                                     </ul>
                                 </div>
