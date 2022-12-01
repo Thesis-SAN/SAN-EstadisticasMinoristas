@@ -7,10 +7,12 @@
     <div class="card-header flex-wrap py-3">
 
         <div class="card-title">
-            <h3 class="card-label">Establecimientos
+            <h3 class="card-label">{{detalle}}
+            <!--
             <span class="d-block text-muted pt-2 font-size-sm">Total de establecimientos : {{  total_est }}</span></h3>
             <br>
             <span class="d-block text-muted pt-2 font-size-sm">Producto mas vendido : {{  prod_mas_vendido }}</span></h3>
+            -->
         </div>
 
         <div class="card-toolbar">
@@ -99,58 +101,25 @@
 
         <!--begin: Datatable-->
         <table class="table table-bordered table-checkable" id="kt_datatable">
-            
             <thead>
                 <tr>
-                    {% for field in field_list %}
+                    {% for field in metricas %}
                         <th>{{field}}</th>
                     {% endfor %}
                 </tr>
             </thead>
 
             <tbody>
-                {% if est_table %}
-                {%  for est in est_table %}
-                <tr>    
-                    <td>{{est.est_id_ods}}</td>
-                    <td>{{est.est_codigo}}</td>
-                    <td>{{est.est_descripcion}}</td>
-                    <td>{{est.est_codigo_estructurado}}</td>
-                    <td>{{est.suc_id_ods}}</td>
-                    <td>{{est.suc_codigo}}</td>
-                    <td>{{est.suc_nombre}}</td>
-                    <td>{{est.comp_id_ods}}</td>
-                    <td>{{est.comp_codigo}}</td>
-                    <td>{{est.comp_nombre}}</td>
-                    <td>{{est.est_es_interno}}</td>
-                    <td>{{est.est_padre_id}}</td>
-                    <td>{{est.est_padre_codigo}}</td>
-                    <td>{{est.est_padre_descripcion}}</td>
-                    <td>{{est.est_nivel}}</td>
-                    <td>{{est.est_codigo_actividad}}</td>
-                    <td>{{est.est_actividad}}</td>
-                    <td>{{est.est_clasificacion_codigo_id}}</td>
-                    <td>{{est.est_clasificacion_codigo}}</td>
-                    <td>{{est.est_clasificacion}}</td>
-                    <td>{{est.est_codigo_sist_informatico_inv}}</td>
-                    <td>{{est.est_sistema_inventario}}</td>
-                    <td>{{est.est_es_dependiente}}</td>
-                    <td>{{est.dpa}}</td>
-                    <td>{{est.est_tipo_estab_codigo_id}}</td>
-                    <td>{{est.est_tipo_estab_codigo}}</td>
-                    <td>{{est.est_tipo_estab}}</td>
-                    <td>{{est.mt_fecha_actualizacion}}</td>
-                    <td>{{est.path}}</td>
-                    <td>{{est.mt_activo}}</td>
-                    <td>{{est.est_sistema_inventario_id_ods}}</td>
-                    <td>{{est.est_sistema_inventario_nombre}}e</td>
-                    
-                    <td nowrap="nowrap"></td>
-                </tr>
-                {% endfor %}
+                {% if table %}
+                    {% for row in table%}
+                        <tr align="center">
+                           <td> {{row}} </td> 
+                        </tr>
+                    {%endfor%}
                 {% endif %}
                 
             </tbody>
+            
         </table>
         <!--end: Datatable-->
     </div>

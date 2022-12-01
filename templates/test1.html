@@ -28,38 +28,38 @@
                             </div>
                             <div class="checkbox-list card-body pt-4  pl-6 pr-6">
                                 <h5>Venta</h5>
-                                <label class="checkbox" onclick="mostrar_elemento(this, 'mostrar_indicadores', 'venta_cant',' Venta Cantidad')" >
-                                    <input type="checkbox" name="selected_metricas" value="venta_cantidad"/>
+                                <label class="checkbox" >
+                                    <input type="checkbox" name="selected_metricas" value="venta_cantidad" onchange="mostrar_elemento(this, 'mostrar_metricas')"/>
                                     <span></span>Venta cantidad</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="venta_costo" />
+                                    <input type="checkbox" name="selected_metricas" value="venta_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Venta costo</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="venta_importe" />
+                                    <input type="checkbox" name="selected_metricas" value="venta_importe" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Venta Importe</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="venta_ganancia" />
+                                    <input type="checkbox" name="selected_metricas" value="venta_ganancia" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Venta Ganancia</label>
 
                                 <h5>Compra</h5>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="compra_cantidad" />
+                                    <input type="checkbox" name="selected_metricas" value="compra_cantidad" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Compra cantidad</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="compra_costo" />
+                                    <input type="checkbox" name="selected_metricas" value="compra_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Compra costo</label>
 
                                 <h5>Inventario</h5>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="inventario_inicial_costo" />
+                                    <input type="checkbox" name="selected_metricas" value="inventario_inicial_costo"  onchange="mostrar_elemento(this, 'mostrar_metricas')"/>
                                     <span></span>Inventario inicial(costo)</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="inventario_costo" />
+                                    <input type="checkbox" name="selected_metricas" value="inventario_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Inventario costo</label>
                             </div>
                         </div>
@@ -74,23 +74,23 @@
                             </div>
                             <div class="checkbox-list card-body pt-4 pl-6 pr-6">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Porciento de variación de Saldo" />
+                                    <input type="checkbox" name="selected_indicadores" value="Porciento de variación de Saldo" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
                                     <span></span>Porciento de variación<br> de Saldo</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Rotación" />
+                                    <input type="checkbox" name="selected_indicadores" value="Rotación"  onchange="mostrar_elemento(this, 'mostrar_indicadores')" />
                                     <span></span>Rotación</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Margen Comercial" />
+                                    <input type="checkbox" name="selected_indicadores" value="Margen Comercial" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
                                     <span></span>Margen Comercial</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Organismo" />
+                                    <input type="checkbox" name="selected_indicadores" value="Organismo" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
                                     <span></span>Organismo</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Cobertura" />
+                                    <input type="checkbox" name="selected_indicadores" value="Cobertura" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
                                     <span></span>Cobertura</label>
                             </div>
                         </div>
@@ -106,53 +106,53 @@
                             <div class="form-group card-body pt-4 pl-6 pr-6">
                                 <div class="radio-list">
                                     <label class="radio radio-rounded">
-                                        <input type="radio" checked="checked"  name="selected_nivel_detalle" value="Departamento"/>
-                                        <span></span>
+                                        <input type="radio" checked="checked" name="selected_nivel_detalle" value="Departamento"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Departamento')"></span>
                                         Departamento
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio"  name="selected_nivel_detalle" value="Sección"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Sección')"></span>
                                         Sección
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Línea"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Línea')"></span>
                                         Línea
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Producto"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Producto')"></span>
                                         Producto
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio"name="selected_nivel_detalle" value="Proveedor"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Proveedor')"></span>
                                         Proveedor
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Sucursal"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Sucursal')"></span>
                                         Sucursal
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Complejo"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Complejo')"></span>
                                         Complejo
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Establecimiento"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Establecimiento')"></span>
                                         Establecimiento
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Período"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Período')"></span>
                                         Período
                                     </label>
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Sist. Informático"/>
-                                        <span></span>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_nivel_detalle', 'Sist. Informático')"></span>
                                         Sist. Informático
                                     </label>
                                 </div>
@@ -169,43 +169,43 @@
                             </div>
                             <div class="checkbox-list card-body pt-4 pl-6 pr-6">
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura"  value="Departamento" />
+                                <input type="checkbox" name="selected_ruptura"  value="Departamento"  onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Departamento</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"   name="selected_ruptura" value="Sección" />
+                                <input type="checkbox"   name="selected_ruptura" value="Sección" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
                                 <span></span>Sección</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Línea"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Línea" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Línea</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Producto" />
+                                <input type="checkbox"  name="selected_ruptura" value="Producto" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
                                 <span></span>Producto</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Proveedor"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Proveedor" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Proveedor</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Sucursal"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Sucursal" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Sucursal</label>
                                 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Complejo"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Complejo" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Complejo</label>
                                     
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Establecimiento" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Establecimiento</label>
                                  
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura" value="Período"/>
+                                <input type="checkbox" name="selected_ruptura" value="Período" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
                                 <span></span>Período</label>
                                 
                                 <label class="checkbox">
-                                <input type="checkbox" name="selected_ruptura" value="Sistema Informático"/>
+                                <input type="checkbox" name="selected_ruptura" value="Sistema Informático" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                 <span></span>Sist. Informático</label>
                             </div>
                         </div>
@@ -249,6 +249,8 @@
                                                         <span></span>
                                                         Acumulado
                                                     </label>
+                                                    <input type="date" class="ml-4 mr-4 mb-2">
+                                                    <input type="date" class="ml-4 mr-4 mb-6">
                                                 </div>
                                             </div>
                                         </div>
@@ -462,20 +464,12 @@
                         <div class="card-body">
                             <div> <!-- Nivel de detalle -->
                                 <div>
-                                    <h5>Nivel de detalle</h5>
+                                    <h5>Nivel de Detalle</h5>
                                 </div>
                                 
                                 <div id="kt_tree_1" class="tree-demo">
                                     <ul id="mostrar_nivel_detalle">
-                                        {% if selected_checkboxes_nivel_detalle %}
-                                            {% for checkbox in selected_checkboxes_nivel_detalle%}
-                                            <li>
-                                                {{checkbox}}
-                                            </li>
-                                            {% endfor %}
-                                        {% else %}
-                                            Seleccional Nivel de Detalle
-                                        {% endif %}
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -483,20 +477,12 @@
                             <div>
                                 <!-- Nivel de detalle -->
                                 <div>
-                                    <h5>Nivel de Ruptura</h5>
+                                    <h5>Totales</h5>
                                 </div>
                             
                                 <div id="kt_tree_2" class="tree-demo">
                                     <ul id="mostrar_ruptura">
-                                        {% if selected_checkboxes_ruptura %}
-                                            {% for checkbox in selected_checkboxes_ruptura%}
-                                            <li>
-                                                {{checkbox}}
-                                            </li>
-                                            {% endfor %}
-                                        {% else %}
-                                            Todos
-                                        {% endif %}
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -509,15 +495,7 @@
                             
                                 <div id="kt_tree_1" class="tree-demo">
                                     <ul id="mostrar_metricas">
-                                        {% if selected_checkboxes_metricas %}
-                                            {% for checkbox in selected_checkboxes_metricas%}
-                                            <li>
-                                                {{checkbox}}
-                                            </li>
-                                            {% endfor %}
-                                        {% else %}
-                                            Todos
-                                        {% endif %}
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -530,15 +508,7 @@
                             
                                 <div id="kt_tree_1" class="tree-demo">
                                     <ul id="mostrar_indicadores">
-                                        {% if selected_checkboxes_indicadores %}
-                                        {% for checkbox in selected_checkboxes_indicadores%}
-                                        <li>
-                                            {{checkbox}}
-                                        </li>
-                                        {% endfor %}
-                                        {% else %}
-                                        Todos
-                                        {% endif %}
+                                        
                                     </ul>
                                 </div>
                             </div>
