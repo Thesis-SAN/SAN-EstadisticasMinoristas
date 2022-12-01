@@ -33,7 +33,7 @@
                                         Sección
                                     </label>
                                     <label class="radio radio-rounded">
-                                        <input type="radio" name="selected_nivel_detalle" value="Línea"/>
+                                        <input type="radio" name="selected_nivel_detalle" value="Linea"/>
                                         <span></span>
                                         Línea
                                     </label>
@@ -62,6 +62,7 @@
                                         <span></span>
                                         Estab. Independiente
                                     </label>
+                                    
                                     <label class="radio radio-rounded">
                                         <input type="radio" name="selected_nivel_detalle" value="Estab. Dependiente"/>
                                         <span></span>
@@ -99,7 +100,7 @@
                                 <span></span>Sección</label>
 
                                 <label class="checkbox">
-                                <input type="checkbox"  name="selected_ruptura" value="Línea"/>
+                                <input type="checkbox"  name="selected_ruptura" value="Linea"/>
                                 <span></span>Línea</label>
 
                                 <label class="checkbox">
@@ -126,6 +127,10 @@
                                 <input type="checkbox" name="selected_ruptura" value="Establecimiento Dependiente"/>
                                 <span></span>Estab. Dependiente</label>
                                 
+                                <label class="checkbox">
+                                <input type="checkbox" name="selected_ruptura" value="Establecimiento"/>
+                                <span></span>Establecimiento</label>
+
                                 <label class="checkbox">
                                 <input type="checkbox" name="selected_ruptura" value="Período"/>
                                 <span></span>Período</label>
@@ -426,6 +431,8 @@
                         <h3 class="card-title align-items-start ">
                             <span class="font-weight-bolder text-dark">Conformar reporte</span>
                         </h3>
+                        <input method ="post" class = "btn btn-primary" type = "submit" id = "generar_reporte" name = "generar_reporte"  value = "Generar reporte">
+
                     </div>
                     <!--end::Header-->
 
