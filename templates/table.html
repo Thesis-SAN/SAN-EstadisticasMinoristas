@@ -112,10 +112,15 @@
             <tbody>
                 {% if table %}
                     {% for row in table%}
-                        <tr align="center">
-                           <td> {{row}} </td> 
-                        </tr>
+                    <tr align="center"></tr>
+                        {% for field in row %}
+                        
+                           <td> {{field}} </td> 
+                        
+                        {%endfor%}
+                    </tr>
                     {%endfor%}
+                    
                 {% endif %}
                 
             </tbody>

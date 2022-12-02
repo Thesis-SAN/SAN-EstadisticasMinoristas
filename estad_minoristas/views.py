@@ -5,6 +5,8 @@ from .models import *
 from django.db.models import Max
 from  .utils import *
 from django.views.generic import ListView
+from itertools import chain
+
 
 # Create your views here.
 
@@ -23,23 +25,27 @@ def report(request):
         metricas = request.POST.getlist("selected_metricas")
         print('nivel de detalle', nivel_detallado)
         procesos_seleccionadas = build_select(metricas)# diccionario proceso--> lista de metrica(ej. compra->[compra cant, compra_costo])
-        models = []
         queries = []
         print(procesos_seleccionadas)
 
         for proc in procesos_seleccionadas:
             m =  procesos_seleccionadas[proc]
             model = get_model(proc, nivel_detallado[0],totales[0])#totales[0] de momento, solo voy a seleccionar una agrupacion y una metrica
-            objects =  model.objects.filter(id__lte=10).values_list(*m)
+            objects =  model.objects.filter(id__lte=4075236,id__gte= 4075226).values_list(*m)
             print(proc ,objects)
-            queries.extend(objects)
+            queries.append(objects)
+            #queries = list(chain(queries,objects))
+        q = []
+        for i in range(0,len(queries[0])):
+            q.append(list(chain(*[o[i] for o in queries])))
         
         print("tabla de query",queries)
+        print("query lista para imprimir",q)
 
         context = {
             'app_path' : request.get_full_path(),
             'metricas' : metricas,
-            'table' : queries,
+            'table' : q,
             'detalle' : nivel_detallado[0],
 
         }
@@ -51,10 +57,16 @@ def report(request):
 
     
     actividades = N_Actividad.objects.all()
-    print(actividades)
+    areas_minoristas = N_TipoArea.objects.all()
+    tipos_codigos = N_TipoCodigo.objects.all()
+    origen_productos = ['Desconocido','Nacional','Importado']
+
     context = {
         'app_path' : request.get_full_path(),
         'actividades' : actividades,
+        'areas_minoristas' :areas_minoristas,
+        'tipos_codigos' : tipos_codigos,
+        'origen_productos' : origen_productos,
     }
     return TemplateResponse(request, 'test1.html',context)
 

@@ -119,6 +119,11 @@ class N_TipoCodigo(models.Model):
     tipo_cod_id = models.IntegerField(name= "tipo_cod_id",primary_key=True)	 
     tipo_cod_descripcion =models.CharField(name='tipo_cod_descripcion',max_length= 100)	
 
+class N_OrigenProducto(models.Model):
+    org_prod_id = models.IntegerField(name= "org_prod_id_ods",unique = True)	 
+    origen_prod_descripcion =models.CharField(name='origen_prod_descripcion',max_length= 100)
+
+
 
 #Fact tables
 class Ventas_Producto_Establecimiento(models.Model):

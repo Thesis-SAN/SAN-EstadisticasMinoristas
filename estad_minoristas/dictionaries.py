@@ -5,9 +5,9 @@ process = {
         'venta_importe' : 'ventas',
         'compra_cantidad' : 'compra',
         'compra_costo' : 'compra',
-        'inventario_cantidad' : 'inventario',
-        'inventario_costo' : 'inventario',
-        'inventario_inicial' : 'inventario',
+        'inv_cantidad' : 'inventario',
+        'inv_costo' : 'inventario',
+        'inv_inicial_costo' : 'inventario',
         
     }
 model_table = {
