@@ -77,15 +77,15 @@ def report(request):
     origen_productos = ['Desconocido','Nacional','Importado']
 
     #familia
-    departamentos = N_Familia.objects.values_list('dep_id_oltp','dep_descripcion').distinct()
-    secciones = N_Familia.objects.values_list('sec_id_oltp','sec_descripcion').distinct()
-    lineas = N_Familia.objects.values_list('lin_id_oltp','lin_descripcion').distinct()
+    departamentos = N_Familia.objects.values('dep_id_oltp','dep_descripcion').distinct()
+    secciones = N_Familia.objects.values('sec_id_oltp','sec_descripcion').distinct()
+    lineas = N_Familia.objects.values('lin_id_oltp','lin_descripcion').distinct()
 
     #proveedor
-    prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values_list('prov_codigo_panamericano','prov_nombre')
-    prov_nacional = N_Proveedor.objects.filter(prov_tipo_mup = 'Nacional' ).values_list('prov_codigo_panamericano','prov_nombre')
-    prov_extranjero = N_Proveedor.objects.filter(prov_tipo_mup = 'Extranjero' ).values_list('prov_codigo_panamericano','prov_nombre')
-    prov_distribuidora = N_Proveedor.objects.filter(prov_tipo_mup = 'Distribuidora' ).values_list('prov_codigo_panamericano','prov_nombre')
+    prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_nacional = N_Proveedor.objects.filter(prov_tipo_mup = 'Nacional' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_extranjero = N_Proveedor.objects.filter(prov_tipo_mup = 'Extranjero' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_distribuidora = N_Proveedor.objects.filter(prov_tipo_mup = 'Distribuidora' ).values('prov_codigo_panamericano','prov_nombre')
 
 
     context = {
