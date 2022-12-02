@@ -77,9 +77,9 @@ def report(request):
     origen_productos = ['Desconocido','Nacional','Importado']
 
     #familia
-    departamentos = N_Familia.objects.values_list('dep_id_oltp','dep_descripcion')
-    secciones = N_Familia.objects.values_list('sec_id_oltp','sec_descripcion')
-    lineas = N_Familia.objects.values_list('lin_id_oltp','lin_descripcion')
+    departamentos = N_Familia.objects.values_list('dep_id_oltp','dep_descripcion').distinct()
+    secciones = N_Familia.objects.values_list('sec_id_oltp','sec_descripcion').distinct()
+    lineas = N_Familia.objects.values_list('lin_id_oltp','lin_descripcion').distinct()
 
     #proveedor
     prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values_list('prov_codigo_panamericano','prov_nombre')
