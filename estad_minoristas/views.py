@@ -20,24 +20,37 @@ def login(request):
 def report(request):
     print("entre enla vista")
     if request.method == "POST":
+        #obtener lista checkbocks y ratios marcados
         nivel_detallado = request.POST.getlist("selected_nivel_detalle")
         totales = request.POST.getlist("selected_totales")
         metricas = request.POST.getlist("selected_metricas")
-        print('nivel de detalle', nivel_detallado)
+        
+        #obtener {proc ->> metricas}
         procesos_seleccionadas = build_select(metricas)# diccionario proceso--> lista de metrica(ej. compra->[compra cant, compra_costo])
-        queries = []
-        print(procesos_seleccionadas)
+        
+        queries = []# lista de [listas de (tuplas)]
 
+        # construir las queries 
         for proc in procesos_seleccionadas:
+            #obtener metricas
             m =  procesos_seleccionadas[proc]
+            
+            #obtener modelo donde se va a hacer la query
             model = get_model(proc, nivel_detallado[0],totales[0])#totales[0] de momento, solo voy a seleccionar una agrupacion y una metrica
+
+            #query
+            #falta comprobar filtros(periodo, tipo de area, origen de producto, tipo de codigo)
             objects =  model.objects.filter(id__lte=4075236,id__gte= 4075226).values_list(*m)
-            print(proc ,objects)
             queries.append(objects)
+
+            print(proc ,objects)
             #queries = list(chain(queries,objects))
+        
+        #construir la tabla a imprimir con todos los procesos
         q = []
         for i in range(0,len(queries[0])):
             q.append(list(chain(*[o[i] for o in queries])))
+        
         
         print("tabla de query",queries)
         print("query lista para imprimir",q)
@@ -55,11 +68,22 @@ def report(request):
     else:
         pass
 
-    
     actividades = N_Actividad.objects.all()
     areas_minoristas = N_TipoArea.objects.all()
     tipos_codigos = N_TipoCodigo.objects.all()
     origen_productos = ['Desconocido','Nacional','Importado']
+
+    #familia
+    departamentos = N_Familia.objects.values_list('dep_descripcion')
+    seciones = N_Familia.objects.values_list('sec_descripcion')
+    lineas = N_Familia.objects.values_list('lin_descripcion')
+
+    #proveedor
+    prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values_list('prov_codigo_panamericano','prov_nombre')
+    prov_nacional = N_Proveedor.objects.filter(prov_tipo_mup = 'Nacional' ).values_list('prov_codigo_panamericano','prov_nombre')
+    prov_extranjero = N_Proveedor.objects.filter(prov_tipo_mup = 'Extranjero' ).values_list('prov_codigo_panamericano','prov_nombre')
+    prov_distribuidora = N_Proveedor.objects.filter(prov_tipo_mup = 'Distribuidora' ).values_list('prov_codigo_panamericano','prov_nombre')
+
 
     context = {
         'app_path' : request.get_full_path(),
@@ -67,6 +91,15 @@ def report(request):
         'areas_minoristas' :areas_minoristas,
         'tipos_codigos' : tipos_codigos,
         'origen_productos' : origen_productos,
+        'departamentos' : departamentos,
+        'seciones' : seciones,
+        'lineas' : lineas,
+        'prov_desconocidos' : prov_desconocidos,
+        'prov_nacional' : prov_nacional,
+        'prov_extranjero' : prov_extranjero,
+        'prov_distribuidora' : prov_distribuidora,
+
+
     }
     return TemplateResponse(request, 'test1.html',context)
 
