@@ -77,10 +77,13 @@ def report(request):
     origen_productos = ['Desconocido','Nacional','Importado']
 
     #familia
-    departamentos = N_Familia.objects.values('dep_id_oltp','dep_descripcion').distinct()
-    secciones = N_Familia.objects.values('sec_id_oltp','sec_descripcion').distinct()
-    lineas = N_Familia.objects.values('lin_id_oltp','lin_descripcion').distinct()
-
+    #departamentos = N_Familia.objects.values('dep_id_oltp','dep_descripcion').distinct()
+    #secciones = N_Familia.objects.values('sec_id_oltp','sec_descripcion').distinct()
+    #lineas = N_Familia.objects.values('lin_id_oltp','lin_descripcion').distinct()
+    lineas = N_Familia.objects.exclude(lin_descripcion = None, lin_id_oltp = None).values('lin_id_oltp','lin_descripcion').distinct()
+    secciones = N_Familia.objects.exclude(sec_descripcion = None, sec_id_oltp = None).values('sec_id_oltp','sec_descripcion').distinct()
+    departamentos = N_Familia.objects.exclude(dep_descripcion = None, dep_id_oltp = None).values('dep_id_oltp','dep_descripcion').distinct()
+    
     #proveedor
     prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values('prov_codigo_panamericano','prov_nombre')
     prov_nacional = N_Proveedor.objects.filter(prov_tipo_mup = 'Nacional' ).values('prov_codigo_panamericano','prov_nombre')
