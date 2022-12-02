@@ -407,13 +407,46 @@
                                             </ul>
                                             <div class="tab-content mt-5" id="myTabContent">
                                                 <div class="tab-pane fade show active" id="kt_tab_pane_1_familia" role="tabpanel" aria-labelledby="kt_tab_pane_1_familia">
-                                                    <p> panel de Departamento</p>
+                                                    {% if departamentos %}
+                                                        <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                            {% for dep in departamentos %}
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" name="selected_fam_dep" value="{{dep.dep_id_oltp}} - {{dep.dep_descripcion}}"
+                                                                        onchange="mostrar_elemento(this, 'mostrar_fam')" />
+                                                                    <span></span>
+                                                                    {{dep.dep_id_oltp}} - {{dep.dep_descripcion}}
+                                                                </label>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_tab_pane_2_familia" role="tabpanel" aria-labelledby="kt_tab_pane_2_familia">
-                                                    <p> panel de Sección</p>
+                                                    {% if secciones %}
+                                                        <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                            {% for sec in secciones %}
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" name="selected_fam_sec" value="{{sec.sec_id_oltp}} - {{sec.sec_descripcion}}"
+                                                                        onchange="mostrar_elemento(this, 'mostrar_fam')" />
+                                                                    <span></span>
+                                                                    {{sec.sec_id_oltp}} - {{sec.sec_descripcion}}
+                                                                </label>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
                                                 <div class="tab-pane fade" id="kt_tab_pane_3_familia" role="tabpanel" aria-labelledby="kt_tab_pane_3_familia">
-                                                    <p> panel de Línea</p>
+                                                    {% if lineas %}
+                                                        <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                            {% for lin in lineas %}
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" name="selected_fam_lin" value="{{lin.lin_id_oltp}} - {{lin.lin_descripcion}}"
+                                                                        onchange="mostrar_elemento(this, 'mostrar_fam')" />
+                                                                    <span></span>
+                                                                    {{lin.lin_id_oltp}} - {{lin.lin_descripcion}}
+                                                                </label>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
@@ -584,6 +617,20 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            <div>
+                                <!-- Familia -->
+                                <div>
+                                    <h5>Familia</h5>
+                                </div>
+                            
+                                <div id="kt_tree_1" class="tree-demo">
+                                    <ul id="mostrar_fam">
+                            
+                                    </ul>
+                                </div>
+                            </div>
+
                         </div>
                         <!--end: Card Body-->
                     </div>
