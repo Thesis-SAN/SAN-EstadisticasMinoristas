@@ -68,15 +68,18 @@ def report(request):
     else:
         pass
 
+    #construir contexto pagina principal de reportes
+
+    #general
     actividades = N_Actividad.objects.all()
     areas_minoristas = N_TipoArea.objects.all()
     tipos_codigos = N_TipoCodigo.objects.all()
     origen_productos = ['Desconocido','Nacional','Importado']
 
     #familia
-    departamentos = N_Familia.objects.values_list('dep_descripcion')
-    seciones = N_Familia.objects.values_list('sec_descripcion')
-    lineas = N_Familia.objects.values_list('lin_descripcion')
+    departamentos = N_Familia.objects.values_list('dep_id_oltp','dep_descripcion')
+    secciones = N_Familia.objects.values_list('sec_id_oltp','sec_descripcion')
+    lineas = N_Familia.objects.values_list('lin_id_oltp','lin_descripcion')
 
     #proveedor
     prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values_list('prov_codigo_panamericano','prov_nombre')
@@ -92,7 +95,7 @@ def report(request):
         'tipos_codigos' : tipos_codigos,
         'origen_productos' : origen_productos,
         'departamentos' : departamentos,
-        'seciones' : seciones,
+        'secciones' : secciones,
         'lineas' : lineas,
         'prov_desconocidos' : prov_desconocidos,
         'prov_nacional' : prov_nacional,
