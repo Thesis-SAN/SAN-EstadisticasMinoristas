@@ -307,11 +307,11 @@
                                         
                                     </div>
                                     <div class="row" style="border:fixed;">
-                                        <div class="row card-body pt-0 pl-1 pr-1 col-8" style="padding-bottom: .25rem;"> <!-- Actividad -->
-                                            <div class="card-body example-preview">
+                                        <div class="row card-body pt-0 pl-1 pr-1 col-8" style="padding-bottom: .25rem; display:block; width: 30rem; height: 30rem; overflow-y: auto;"> <!-- Actividad -->
+                                            <div class="card-body example-preview" >
                                                 <h5>Actividad</h5>
                                                 <span class="form-text text-muted">Si no es seleccionada ninguna actividad se tienen en cuenta todas.</span>
-                                                <div class="checkbox-list card-body pt-4 pl-6 pr-6">
+                                                <div class="checkbox-list card-body pt-4 pl-6 pr-6" >
                                                     {% if actividades %}
                                                         {% for act in actividades %}
                                                             <label class="checkbox">
