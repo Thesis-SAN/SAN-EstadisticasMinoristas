@@ -258,56 +258,67 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body pt-0 pl-1 pr-1" style="padding-bottom: .25rem;"> <!-- Area Minorista -->
+                                        <div class="card-body pt-0 pl-1 pr-1" style="padding-bottom: .25rem;  display:block; height: 20rem; overflow-y: auto;"> <!-- Area Minorista -->
                                             <div class="column example-preview" style="padding: 1rem 1rem;">
                                                 <div>
                                                     <h5>Área Minorista</h5>
                                                 </div>
+
                                                 <div class="checkbox-list card-body pt-4">
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="CUP" />
+                                                        <input type="checkbox" name="select_divisa" value="CUP" onchange="mostrar_elemento(this, 'mostrar_area')"  />
                                                         <span></span>
                                                         CUP
                                                     </label>
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="MLC" />
+                                                        <input type="checkbox" name="select_divisa" value="MLC" onchange="mostrar_elemento(this, 'mostrar_area')"  />
                                                         <span></span>
                                                         MLC
                                                     </label>
                                                     <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="TODOS" />
+                                                        <input type="checkbox" name="select_divisa" value="TODOS"  onchange="mostrar_elemento(this, 'mostrar_area')" />
                                                         <span></span>
                                                         TODOS
                                                     </label>
                                                 </div>
+                                                <!-- <span class="form-text text-muted">Seleccione las opciones siguientes en caso de no quedar contemplada en las categorias anteriores</span>  -->
+                                                
+                                                <h6>Selección variada</h6>
+                                                <div class="checkbox-list card-body pt-4">
+                                                {% if areas_minoristas %}
+                                                    {% for area in areas_minoristas %}
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="select_area" value="{{ area.tipo_area_nombre }}" 
+                                                                onchange="mostrar_elemento(this, 'mostrar_area')" />
+                                                            <span></span>
+                                                            {{ area.tipo_area_nombre }}
+                                                        </label>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="card-body pt-0 pl-1 pr-1" style="padding-bottom: .25rem;"> <!-- Origen de productos -->
                                             <div class="card-body example-preview" style="padding: 1rem 1rem;">
                                                 <h5>Origen de productos</h5>
+                                                {% if origen_productos %}
                                                 <div class="checkbox-list card-body pt-4">
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="CUP" />
-                                                        <span></span>
-                                                        Desconocido
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="MLC" />
-                                                        <span></span>
-                                                        Nacional
-                                                    </label>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" name="select_divisa" value="TODOS" />
-                                                        <span></span>
-                                                        Importado
-                                                    </label>
+                                                    {% for origen in origen_productos %}
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" name="select_divisa" value="{{origen}}" />
+                                                            <span></span>
+                                                            {{origen}}
+                                                        </label>
+                                                    {% endfor %}
                                                 </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         
                                     </div>
                                     <div class="row" style="border:fixed;">
-                                        <div class="row card-body pt-0 pl-1 pr-1 col-8" style="padding-bottom: .25rem; display:block; width: 30rem; height: 30rem; overflow-y: auto;"> <!-- Actividad -->
+                                        <div class="row card-body pt-0 pl-1 pr-1 col-8" style="padding-bottom: .25rem; display:block; height: 20rem; overflow-y: auto;"> <!-- Actividad -->
                                             <div class="card-body example-preview" >
                                                 <h5>Actividad</h5>
                                                 <span class="form-text text-muted">Si no es seleccionada ninguna actividad se tienen en cuenta todas.</span>
@@ -381,9 +392,32 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary">Departamento</button>
-                                    <button type="button" class="btn btn-primary">Línea</button>
-                                    <button type="button" class="btn btn-primary">Secciones</button>
+                                    <div class="example">
+                                        <div>
+                                            <ul class="nav nav-tabs nav-tabs-line nav-boldest">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1_familia">Departamento</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2_familia">Sección</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3_familia">Línea</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content mt-5" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="kt_tab_pane_1_familia" role="tabpanel" aria-labelledby="kt_tab_pane_1_familia">
+                                                    <p> panel de Departamento</p>
+                                                </div>
+                                                <div class="tab-pane fade" id="kt_tab_pane_2_familia" role="tabpanel" aria-labelledby="kt_tab_pane_2_familia">
+                                                    <p> panel de Sección</p>
+                                                </div>
+                                                <div class="tab-pane fade" id="kt_tab_pane_3_familia" role="tabpanel" aria-labelledby="kt_tab_pane_3_familia">
+                                                    <p> panel de Línea</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <!--
@@ -533,6 +567,19 @@
                             
                                 <div id="kt_tree_1" class="tree-demo">
                                     <ul id="mostrar_actividad">
+                            
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <!-- Area minorista -->
+                                <div>
+                                    <h5>Área Minorista</h5>
+                                </div>
+                            
+                                <div id="kt_tree_1" class="tree-demo">
+                                    <ul id="mostrar_area">
                             
                                     </ul>
                                 </div>
