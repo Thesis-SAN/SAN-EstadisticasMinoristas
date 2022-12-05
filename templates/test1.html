@@ -53,11 +53,12 @@
                                     <input type="checkbox" name="selected_metricas" value="compra_costo" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
                                     <span></span>Compra costo</label>
                                 
-                                <label class="checkbox">
-                                    <input type="checkbox" name="selected_metricas" value="inv_cantidad" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
-                                    <span></span>Inventario cantidad</label>    
 
                                 <h5>Inventario</h5>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="selected_metricas" value="inv_cantidad" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
+                                    <span></span>Inventario cantidad</label>
+                                    
                                 <label class="checkbox">
                                     <input type="checkbox" name="selected_metricas" value="inv_inicial_costo"  onchange="mostrar_elemento(this, 'mostrar_metricas')"/>
                                     <span></span>Inventario inicial(costo)</label>
@@ -489,31 +490,66 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_4">
-                                <div class="row">
-                                    <div class="radio-list">
-                                        <label class="radio radio-rounded">
-                                            <input type="radio" checked="checked" name="selected_nivel_detalle" value="Departamento" />
-                                            <span></span>
-                                            Establecimientos
-                                        </label>
-                                        <label class="radio radio-rounded">
-                                            <input type="radio" name="selected_nivel_detalle" value="Sección" />
-                                            <span></span>
-                                            Sist. Informático
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group pt-4">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Filtrar" id="filtrar_familia" />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">Buscar</button>
+                                <div class="example">
+                                    <div>
+                                        <ul class="nav nav-tabs nav-tabs-line nav-boldest">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1_establecimiento">Establecimiento</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2_establecimiento">Complejo</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3_establecimiento">Sucursal</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content mt-5" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="kt_tab_pane_1_establecimiento" role="tabpanel" aria-labelledby="kt_tab_pane_1_establecimiento">
+                                                {% if establecimientos %}
+                                                    <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                        {% for est in establecimientos %}
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="selected_entidad_est" value="{{est.est_codigo}}"
+                                                                    onchange="mostrar_elemento(this, 'mostrar_ent')" />
+                                                                <span></span>
+                                                                {{est.est_id_ods}}-{{est.est_codigo}} - {{est.est_descripcion}}
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="tab-pane fade" id="kt_tab_pane_2_establecimiento" role="tabpanel" aria-labelledby="kt_tab_pane_2_establecimiento">
+                                                {% if complejos %}
+                                                    <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                        {% for comp in complejos%}
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="selected_entidad_comp" value="{{comp.comp_codigo}} - {{comp.comp_nombre}}"
+                                                                    onchange="mostrar_elemento(this, 'mostrar_ent')" />
+                                                                <span></span>
+                                                                {{comp.comp_codigo}} - {{comp.comp_nombre}}
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="tab-pane fade" id="kt_tab_pane_3_establecimiento" role="tabpanel" aria-labelledby="kt_tab_pane_3_establecimiento">
+                                                {% if sucursales %}
+                                                    <div class="checkbox-list card-body pt-4 pl-6 pr-6" style="height: 30rem; overflow-y: auto;">
+                                                        {% for suc in sucursales %}
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="selected_entidad_suc" value="{{suc.suc_codigo}} - {{suc.suc_nombre}}"
+                                                                    onchange="mostrar_elemento(this, 'mostrar_ent')" />
+                                                                <span></span>
+                                                                
+                                                                {{suc.suc_codigo}} - {{suc.suc_nombre}}
+                                                            </label>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--
-                                    canvas
-                                -->
                             </div>
                         </div>
                     </div>
@@ -626,6 +662,19 @@
                             
                                 <div id="kt_tree_1" class="tree-demo">
                                     <ul id="mostrar_fam">
+                            
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <!-- Entidad -->
+                                <div>
+                                    <h5>Entidad</h5>
+                                </div>
+                            
+                                <div id="kt_tree_1" class="tree-demo">
+                                    <ul id="mostrar_ent">
                             
                                     </ul>
                                 </div>

@@ -289,10 +289,7 @@ class Ventas_Producto_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True) 
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_prod_suc')
-        ]
+   
 
 class Compra_Producto_Sucursal(models.Model):
     #key
@@ -313,10 +310,6 @@ class Compra_Producto_Sucursal(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_prod_suc')
-        ]
 
 class Inventario_Producto_Sucursal(models.Model):
     #key
@@ -344,10 +337,6 @@ class Inventario_Producto_Sucursal(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_prod_suc')
-        ]
 
 class Ajuste_Producto_Sucursal(models.Model):
     #key
@@ -368,10 +357,7 @@ class Ajuste_Producto_Sucursal(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_suc')
-        ]
+    
 
 class Transferencia_Producto_Sucursal(models.Model):
     #key
@@ -390,10 +376,7 @@ class Transferencia_Producto_Sucursal(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
     
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_prod_suc')
-        ]
+    
 
 #Producto_Complejo
 class Ventas_Producto_Complejo(models.Model):
@@ -423,10 +406,7 @@ class Ventas_Producto_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_prod_complejo')
-        ]
+  
 
 class Compra_Producto_Complejo(models.Model):
     #key
@@ -447,10 +427,7 @@ class Compra_Producto_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_prod_complejo')
-        ]
+  
 
 class Inventario_Producto_Complejo(models.Model):
     #key
@@ -479,10 +456,7 @@ class Inventario_Producto_Complejo(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_prod_complejo')
-        ]
+
 
 class Ajuste_Producto_Complejo(models.Model):
     #key
@@ -503,10 +477,7 @@ class Ajuste_Producto_Complejo(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_prod_complejo')
-        ]
+ 
 
 class Transferencia_Producto_Complejo(models.Model):
     #key
@@ -525,10 +496,6 @@ class Transferencia_Producto_Complejo(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['prod_id','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_prod_complejo')
-        ]
 
 #Linea_Establecimiento
 class Ventas_Linea_Establecimiento(models.Model):
@@ -558,10 +525,6 @@ class Ventas_Linea_Establecimiento(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_prod')
-        ]
 
 class Compra_Linea_Establecimiento(models.Model):
     #key
@@ -582,11 +545,7 @@ class Compra_Linea_Establecimiento(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_prod')
-        ]
-
+   
 class Inventario_Linea_Establecimiento(models.Model):
     #key
     
@@ -615,10 +574,7 @@ class Inventario_Linea_Establecimiento(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_prod')
-        ]
+
 
 class Ajuste_Linea_Establecimiento(models.Model):
     #key
@@ -640,10 +596,6 @@ class Ajuste_Linea_Establecimiento(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_prod')
-        ]
 
 class Transferencia_Linea_Establecimiento(models.Model):
     #key
@@ -662,10 +614,6 @@ class Transferencia_Linea_Establecimiento(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_prod')
-        ]
 
 
 #Linea_Complejo
@@ -696,10 +644,6 @@ class Ventas_Linea_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_complejo')
-        ]
 
 class Compra_Linea_Complejo(models.Model):
     #key
@@ -720,11 +664,7 @@ class Compra_Linea_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_complejo')
-        ]
-
+ 
 class Inventario_Linea_Complejo(models.Model):
     #key
     
@@ -752,10 +692,6 @@ class Inventario_Linea_Complejo(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_complejo')
-        ]
 
 class Ajuste_Linea_Complejo(models.Model):
     #key
@@ -776,10 +712,7 @@ class Ajuste_Linea_Complejo(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_complejo')
-        ]
+ 
 
 class Transferencia_Linea_Complejo(models.Model):
     #key
@@ -798,10 +731,7 @@ class Transferencia_Linea_Complejo(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf__linea_complejo')
-        ]
+
 
 
 #Linea_Sucursal
@@ -832,10 +762,6 @@ class Ventas_Linea_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_linea_sucursal')
-        ]
 
 class Compra_Linea_Sucursal(models.Model):
     #key
@@ -855,11 +781,6 @@ class Compra_Linea_Sucursal(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_linea_sucursal')
-        ]
 
 class Inventario_Linea_Sucursal(models.Model):
     #key
@@ -888,10 +809,7 @@ class Inventario_Linea_Sucursal(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_linea_sucursal')
-        ]
+
 
 class Ajuste_Linea_Sucursal(models.Model):
     #key
@@ -912,10 +830,7 @@ class Ajuste_Linea_Sucursal(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_linea_sucursal')
-        ]
+ 
 
 class Transferencia_Linea_Sucursal(models.Model):
     #key
@@ -934,10 +849,6 @@ class Transferencia_Linea_Sucursal(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_linea_sucursal')
-        ]
 
 
 #Departamento_Establecimiento
@@ -968,11 +879,6 @@ class Ventas_Departamento_Establecimiento(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_est')
-        ]
-
 class Compra_Departamento_Establecimiento(models.Model):
     #key
     
@@ -992,10 +898,6 @@ class Compra_Departamento_Establecimiento(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_est')
-        ]
 
 class Inventario_Departamento_Establecimiento(models.Model):
     #key
@@ -1024,10 +926,6 @@ class Inventario_Departamento_Establecimiento(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_est')
-        ]
 
 class Ajuste_Departamento_Establecimiento(models.Model):
     #key
@@ -1048,10 +946,7 @@ class Ajuste_Departamento_Establecimiento(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_est')
-        ]
+
 
 class Transferencia_Departamento_Establecimiento(models.Model):
     #key
@@ -1070,10 +965,6 @@ class Transferencia_Departamento_Establecimiento(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_est')
-        ]
 
 #Departamento_Complejo
 class Ventas_Departamento_Complejo(models.Model):
@@ -1103,10 +994,6 @@ class Ventas_Departamento_Complejo(models.Model):
     importe_nacional =  models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_complejo')
-        ]
 
 class Compra_Departamento_Complejo(models.Model):
     #key
@@ -1127,10 +1014,6 @@ class Compra_Departamento_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_complejo')
-        ]
 
 class Inventario_Departamento_Complejo(models.Model):
     #key
@@ -1159,10 +1042,7 @@ class Inventario_Departamento_Complejo(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_complejo')
-        ]
+
 
 class Ajuste_Departamento_Complejo(models.Model):
     #key
@@ -1183,10 +1063,6 @@ class Ajuste_Departamento_Complejo(models.Model):
     costo_anno_ant =   models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_complejo')
-        ]
 
 class Transferencia_Departamento_Complejo(models.Model):
     #key
@@ -1204,11 +1080,6 @@ class Transferencia_Departamento_Complejo(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_complejo')
-        ]
 
 
 #Departamento_Sucursal
@@ -1239,10 +1110,6 @@ class Ventas_Departamento_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_dep_sucursal')
-        ]
 
 class Compra_Departamento_Sucursal(models.Model):
     #key
@@ -1263,10 +1130,6 @@ class Compra_Departamento_Sucursal(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_dep_sucursal')
-        ]
 
 class Inventario_Departamento_Sucursal(models.Model):
     #key
@@ -1295,10 +1158,6 @@ class Inventario_Departamento_Sucursal(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_dep_sucursal')
-        ]
 
 class Ajuste_Departamento_Sucursal(models.Model):
     #key
@@ -1319,11 +1178,6 @@ class Ajuste_Departamento_Sucursal(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_dep_sucursal')
-        ]
-
 class Transferencia_Departamento_Sucursal(models.Model):
     #key
     
@@ -1340,11 +1194,6 @@ class Transferencia_Departamento_Sucursal(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_dep_sucursal')
-        ]
 
 
 #Seccion_Establecimiento
@@ -1375,10 +1224,7 @@ class Ventas_Seccion_Establecimiento(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_prod')
-        ]
+  
 
 class Compra_Seccion_Establecimiento(models.Model):
     #key
@@ -1399,10 +1245,6 @@ class Compra_Seccion_Establecimiento(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_prod')
-        ]
 
 class Inventario_Seccion_Establecimiento(models.Model):
     #key
@@ -1432,10 +1274,6 @@ class Inventario_Seccion_Establecimiento(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_prod')
-        ]
 
 class Ajuste_Seccion_Establecimiento(models.Model):
     #key
@@ -1457,11 +1295,6 @@ class Ajuste_Seccion_Establecimiento(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_prod')
-        ]
-
 class Transferencia_Seccion_Establecimiento(models.Model):
     #key
     
@@ -1479,10 +1312,6 @@ class Transferencia_Seccion_Establecimiento(models.Model):
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccion_prod')
-        ]
 
 
 #Seccion_Complejo
@@ -1513,10 +1342,7 @@ class Ventas_Seccion_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_complejo')
-        ]
+
 
 class Compra_Seccion_Complejo(models.Model):
     #key
@@ -1537,10 +1363,7 @@ class Compra_Seccion_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_complejo')
-        ]
+
 
 class Inventario_Seccion_Complejo(models.Model):
     #key
@@ -1569,10 +1392,6 @@ class Inventario_Seccion_Complejo(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_complejo')
-        ]
 
 class Ajuste_Seccion_Complejo(models.Model):
     #key
@@ -1593,10 +1412,7 @@ class Ajuste_Seccion_Complejo(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_complejo')
-        ]
+ 
 
 class Transferencia_Seccion_Complejo(models.Model):
     #key
@@ -1614,11 +1430,6 @@ class Transferencia_Seccion_Complejo(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccioncomplejo')
-        ]
 
 
 #Seccion_Sucursal
@@ -1649,10 +1460,6 @@ class Ventas_Seccion_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'venta_seccion_sucursal')
-        ]
 
 class Compra_Seccion_Sucursal(models.Model):
     #key
@@ -1673,10 +1480,7 @@ class Compra_Seccion_Sucursal(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'compra_seccion_sucursal')
-        ]
+
 
 class Inventario_Seccion_Sucursal(models.Model):
     #key
@@ -1705,10 +1509,6 @@ class Inventario_Seccion_Sucursal(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'inv_seccion_sucursal')
-        ]
 
 class Ajuste_Seccion_Sucursal(models.Model):
     #key
@@ -1729,10 +1529,7 @@ class Ajuste_Seccion_Sucursal(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'ajuste_seccion_sucursal')
-        ]
+
 
 class Transferencia_Seccion_Sucursal(models.Model):
     #key
@@ -1750,10 +1547,4 @@ class Transferencia_Seccion_Sucursal(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['familia','est_id','prov_id','periodo_id','act_id','area_tipo','tipo_cod_id'],name= 'transf_seccion_sucursal')
-        ]
-
 

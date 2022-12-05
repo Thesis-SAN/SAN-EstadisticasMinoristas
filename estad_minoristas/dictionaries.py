@@ -55,7 +55,27 @@ model_table = {
 }
 
 nomenclator = {
-    'Establecimiento' : N_Establecimiento,
-    'Producto': N_Producto,
+    'Establecimiento' : (N_Establecimiento, ['est_codigo','est_descripcion']),
+    'Producto': (N_Producto, ['prod_recno','prod_descripcion']),
+    'Departamento' : (N_Familia,['dep_id_oltp','dep_descripcion']),
+    'Seccion' : (N_Familia,['sec_id_oltp','sec_descripcion']),
+    'Linea' : (N_Familia,['lin_id_oltp','lin_descripcion']),
+    'Sucursal' : (N_Establecimiento, ['suc_codigo','suc_nombre']),
+    'Complejo' : (N_Establecimiento, ['comp_codigo','comp_nombre']),
+    'Proveedor' : (N_Proveedor, ['prov_codigo_panamericano','prov_nombre']),
+    'Periodo' : (N_Periodo, ['periodo_descripcion']),
     
 }
+
+agrup_id =  {
+    'Establecimiento' : 'est_id',
+    'Producto': 'prod_id',
+    'Departamento' : 'dep_id_oltp',
+    'Seccion' : 'sec_id_oltp',
+    'Linea' : 'lin_id_oltp',
+    'Sucursal' : 'suc_id_ods',
+    'Complejo' : 'comp_id_ods',
+    'Proveedor' :'prov_id_ods',
+    'Periodo' : 'periodo_id_ods',
+}
+
