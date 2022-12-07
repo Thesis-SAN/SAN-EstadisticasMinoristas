@@ -55,26 +55,38 @@ model_table = {
 }
 
 nomenclator = {
-    'Establecimiento' : (N_Establecimiento, ['est_codigo','est_descripcion']),
-    'Producto': (N_Producto, ['prod_recno','prod_descripcion']),
-    'Departamento' : (N_Familia,['dep_id_oltp','dep_descripcion']),
-    'Seccion' : (N_Familia,['sec_id_oltp','sec_descripcion']),
-    'Linea' : (N_Familia,['lin_id_oltp','lin_descripcion']),
-    'Sucursal' : (N_Establecimiento, ['suc_codigo','suc_nombre']),
-    'Complejo' : (N_Establecimiento, ['comp_codigo','comp_nombre']),
-    'Proveedor' : (N_Proveedor, ['prov_codigo_panamericano','prov_nombre']),
-    'Periodo' : (N_Periodo, ['periodo_descripcion']),
+    'Establecimiento' : (N_Establecimiento, ['est_codigo','est_descripcion'],'e'),
+    'Producto': (N_Producto, ['prod_recno','prod_descripcion'],'p'),
+    'Departamento' : (N_Familia,['dep_id_oltp','dep_descripcion'],'f'),
+    'Seccion' : (N_Familia,['sec_id_oltp','sec_descripcion'],'f'),
+    'Linea' : (N_Familia,['lin_id_oltp','lin_descripcion'],'f'),
+    'Sucursal' : (N_Establecimiento, ['suc_codigo','suc_nombre'],'e'),
+    'Complejo' : (N_Establecimiento, ['comp_codigo','comp_nombre'],'e'),
+    'Proveedor' : (N_Proveedor, ['prov_codigo_panamericano','prov_nombre'],'prov'),
+    'Periodo' : (N_Periodo, ['periodo_descripcion'],'periodo'),
     
+}
+
+agrup = {
+    'Establecimiento' : ('establecimiento', 'est_id_ods'),
+    'Producto': ('producto','prod_id'),
+    'departamento' : ('familia','fam_id_oltp'),
+    'Seccion' :  ('familia','fam_id_oltp'),
+    'Linea' :  ('familia','fam_id_oltp'),
+    'Sucursal' : ('establecimiento', 'est_id_os'),
+    'Complejo' : ('establecimiento', 'est_id_os'),
+    'Proveedor' :('proveedor','prov_id_ods'),
+    'Periodo' : ('periodo','periodo_id_ods'),
 }
 
 agrup_id =  {
     'Establecimiento' : 'est_id',
     'Producto': 'prod_id',
-    'Departamento' : 'dep_id_oltp',
-    'Seccion' : 'sec_id_oltp',
-    'Linea' : 'lin_id_oltp',
-    'Sucursal' : 'suc_id_ods',
-    'Complejo' : 'comp_id_ods',
+    'Departamento' : 'familia',
+    'Seccion' : 'familia',
+    'Linea' : 'familia',
+    'Sucursal' : 'est_id',
+    'Complejo' : 'est_id',
     'Proveedor' :'prov_id_ods',
     'Periodo' : 'periodo_id_ods',
 }

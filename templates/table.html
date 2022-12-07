@@ -101,24 +101,21 @@
 
         <!--begin: Datatable-->
         <table class="table table-bordered table-checkable" id="kt_datatable">
-            <thead>
-                <tr>
-                    {% for field in encabezado %}
-                        <th>{{field}}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
+            
 
             <tbody>
-                {% if table %}
-                    {% for row in table%}
+                {% if query %}
+                    {% for row in query%}
+                    
+                    
                     <tr align="center"></tr>
-                        {% for field in row %}
+                    {% for field in row%}
                         
-                           <td> {{field}} </td> 
+                        <td> {{field}} </td> 
                         
-                        {%endfor%}
+                    {%endfor%}
                     </tr>
+
                     {%endfor%}
                     
                 {% endif %}

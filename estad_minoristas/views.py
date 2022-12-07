@@ -7,6 +7,8 @@ from  .utils import *
 from django.views.generic import ListView
 from itertools import chain
 from django.db.models import Sum, Subquery
+from django.db import connection
+
 
 # Create your views here.
 
@@ -17,11 +19,13 @@ def index(request):
 def login(request):
     return render(request, 'login.html')
 
+'''
 def report(request):
     if request.method == "POST":
         #obtener lista checkbocks y ratios marcados
         nivel_detallado = request.POST.getlist("selected_nivel_detalle")[0]
         totales = request.POST.getlist("selected_totales")
+        print(nivel_detallado)
         metricas = request.POST.getlist("selected_metricas")
         
         filtro_est = request.POST.getlist("selected_entidad_est")
@@ -32,70 +36,138 @@ def report(request):
         filtro_lin = request.POST.getlist("selected_fam_lin")
         filtro_dep = request.POST.getlist("selected_fam_dep")
         
-        #de momento solo un total seleccionado=> len(agrupac)=1
-        #construir el QS con los datos a mostrar de las agrupacione
-        modelo,datos_a_mostrar = get_model_detail(totales[0])
-        qs_datos_total = modelo.objects.values_list(*datos_a_mostrar)
-    
-        
-        #construir el query set con los datos a mostrar del nivel detallado
 
+        #datos a mostrar del total
+        modelo_total,datos_a_mostrar_total = get_model_detail(totales[0])
+        
+        #datos a mostrar del nivel detallado
+        modelo_detalle,datos_a_mostrar_detalle = get_model_detail(totales[0])
+        
         #obtener {proc ->> metricas}
         procesos_seleccionados = build_select(metricas)# diccionario proceso--> lista de metrica(ej. compra->[compra cant, compra_costo])
+        
+        modelos = []#[(modelo_detalle, modelo_agrup]
+        for proc in procesos_seleccionados:
+            modelo = 'estad_minoristas_' + proc + '_'+ nivel_detallado.lower() + '_' + totales[0].lower()
+            modelos.append((proc,modelo))
 
-        primer_proceso = list(procesos_seleccionados.keys())[0]
-        q = None
-        for met in procesos_seleccionados[primer_proceso]:
-            modelo = get_model(primer_proceso,nivel_detallado,totales[0])
-            id_agrup = get_id(totales[0])
-            id_detalle = get_id(nivel_detallado)
-            try:
-                q = q.annotate(Sum(met))
-            except:
-                q = modelo.objects.values(id_detalle,id_agrup).annotate(Sum(met))
-        print("primera parte",q)
+        id_detalle = get_id(nivel_detallado)
+        id_total = get_id(totales[0])
+        
+        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos)
+        print(query)
 
-        list_proc_selecc = list(procesos_seleccionados.keys())[1:]
-        for proc in list_proc_selecc:
-            m = procesos_seleccionados[proc]
-
-            #obtener modelo al que se va a hacer la consulta
-            modelo = get_model(proc,nivel_detallado,totales[0])
-
-            for _,met in enumerate(m):
-                q = q.annotate(alias = Subquery(modelo.objects.values(id_detalle,id_agrup).annotate(Sum(met)).values(met+"__sum")))
-
-            #q = q.annotate(Subquery(modelo.objects.values(id_detalle,id_agrup).annotate(Sum(m))))
-
-            #q = modelo.objects.values(id_detalle,id_agrup).annotate(Sum(m[0]))
-            #for _,met in enumerate(m, start = 1):
-            #    q = q.annotate(Sum(met))
-
-
-        print('table', q[:10])
-        '''
-            id_agrup = get_id(totales[0])
-            id_detalle = get_id(nivel_detallado)
-            agrup =  q.values(id_agrup).annotate(Sum(m[0]))
-            for _,met in enumerate(m, start = 1):
-                agrup = agrup.annotate(Sum(met))
-            
-            print("Agrupacion",agrup[:10])
-
-            agrup = agrup[:10]
-            for a in agrup:
-                a = a[id_agrup]
-                print(a)
-                kwargs = {id_agrup: a} #build_kwargs_filter(id_agrup,a)
-                print(kwargs , id_detalle)
-                r = q.filter(**kwargs).values(id_detalle)[:10]
-                print(r)
-            '''
+        q = my_custom_sql(query)
+        print(q)
 
         #unir los qs de cada metrica
         context = {
             'app_path' : request.get_full_path(),
 
+        }
+
+        return TemplateResponse(request, 'table.html', context)
+
+    else:
+        pass
+
+    #construir contexto pagina principal de reportes
+
+    #general
+    actividades = N_Actividad.objects.all()
+    areas_minoristas = N_TipoArea.objects.all()
+    tipos_codigos = N_TipoCodigo.objects.all()
+    origen_productos = ['Desconocido','Nacional','Importado']
+
+    #familia
+    lineas = N_Familia.objects.exclude(lin_descripcion = None, lin_id_oltp = None).values('lin_id_oltp','lin_descripcion').distinct().order_by('lin_id_oltp')
+    secciones = N_Familia.objects.exclude(sec_descripcion = None, sec_id_oltp = None).values('sec_id_oltp','sec_descripcion').distinct().order_by('sec_id_oltp')
+    departamentos = N_Familia.objects.exclude(dep_descripcion = None, dep_id_oltp = None).values('dep_id_oltp','dep_descripcion').distinct().order_by('dep_id_oltp')
+    
+    #proveedor
+    prov_desconocidos = N_Proveedor.objects.filter(prov_tipo_mup = '_Desconocido' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_nacional = N_Proveedor.objects.filter(prov_tipo_mup = 'Nacional' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_extranjero = N_Proveedor.objects.filter(prov_tipo_mup = 'Extranjero' ).values('prov_codigo_panamericano','prov_nombre')
+    prov_distribuidora = N_Proveedor.objects.filter(prov_tipo_mup = 'Distribuidora' ).values('prov_codigo_panamericano','prov_nombre')
+    
+    #entidades 
+    sucursales = N_Establecimiento.objects.exclude(suc_codigo = None).values('suc_codigo','suc_nombre').distinct().order_by('suc_codigo')
+    establecimientos = N_Establecimiento.objects.values('est_id_ods','est_codigo','est_descripcion').distinct().order_by('est_id_ods')
+    complejos = N_Establecimiento.objects.values('comp_codigo','comp_nombre').distinct().order_by('comp_codigo')
+
+    context = {
+        'app_path' : request.get_full_path(),
+        'actividades' : actividades,
+        'areas_minoristas' :areas_minoristas,
+        'tipos_codigos' : tipos_codigos,
+        'origen_productos' : origen_productos,
+        'departamentos' : departamentos,
+        'secciones' : secciones,
+        'lineas' : lineas,
+        'prov_desconocidos' : prov_desconocidos,
+        'prov_nacional' : prov_nacional,
+        'prov_extranjero' : prov_extranjero,
+        'prov_distribuidora' : prov_distribuidora,
+        'sucursales' : sucursales,
+        'complejos' : complejos,
+        'establecimientos' : establecimientos,
+    } 
+    return TemplateResponse(request, 'test1.html',context)
+
+'''
+
+def report(request):
+    if request.method == "POST":
+        #obtener lista checkbocks y ratios marcados
+        nivel_detallado = request.POST.getlist("selected_nivel_detalle")[0]
+        totales = request.POST.getlist("selected_totales")
+        print(nivel_detallado)
+        metricas = request.POST.getlist("selected_metricas")
+        
+        filtro_est = request.POST.getlist("selected_entidad_est")
+        filtro_comp = request.POST.getlist("selected_entidad_comp")
+        filtro_suc = request.POST.getlist("selected_entidad_suc")
+
+        filtro_secc = request.POST.getlist("selected_fam_sec")
+        filtro_lin = request.POST.getlist("selected_fam_lin")
+        filtro_dep = request.POST.getlist("selected_fam_dep")
+        
+
+        #datos a mostrar del total
+        #modelo_total,datos_a_mostrar_total = get_model_detail(totales[0])
+        #query_datos_total = modelo_total.objects.values(*datos_a_mostrar_total).distinct()
+        #print(query_datos_total)
+
+        #datos a mostrar del nivel detallado
+        #modelo_detalle,datos_a_mostrar_detalle = get_model_detail(nivel_detallado)
+        #query_datos_detalle = modelo_detalle.objects.values(*datos_a_mostrar_detalle).distinct()
+        #print(query_datos_detalle)
+        
+        #obtener {proc ->> metricas}
+        procesos_seleccionados = build_select(metricas)# diccionario proceso--> lista de metrica(ej. compra->[compra cant, compra_costo])
+        modelo_1 =  get_model(list(procesos_seleccionados.keys())[0],nivel_detallado,totales[0])
+
+        modelos = []#[(modelo_detalle, modelo_agrup]
+        for proc in procesos_seleccionados:
+            modelo = 'estad_minoristas_' + proc + '_'+ nivel_detallado.lower() + '_' + totales[0].lower()
+            modelos.append((proc,modelo))
+
+        id_detalle = get_id(nivel_detallado)
+        id_total = get_id(totales[0])
+        
+        #construir query
+        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos,nivel_detallado, totales[0])
+        print(query)
+        
+        # raw_query = modelo_1.objects.raw(query) 
+        # print(raw_query)
+        q = fetchall_sql_query(query)
+        print(q)
+
+        #unir los qs de cada metrica
+        context = {
+            'app_path' : request.get_full_path(),
+            'query' : q
         }
 
         return TemplateResponse(request, 'table.html', context)
