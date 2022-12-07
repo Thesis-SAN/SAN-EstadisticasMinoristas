@@ -77,25 +77,27 @@
                                 </div>
                             </div>
                             <div class="checkbox-list card-body pt-4 pl-6 pr-6">
+                                <h5>Ventas</h5>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Porciento de variación de Saldo" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
-                                    <span></span>Porciento de variación<br> de Saldo</label>
+                                    <input type="checkbox" name="selected_indicadores" value="Utilidad (Ganancia)" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
+                                    <span></span>Utilidad (Ganancia)</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Rotación"  onchange="mostrar_elemento(this, 'mostrar_indicadores')" />
-                                    <span></span>Rotación</label>
+                                    <input type="checkbox" name="selected_indicadores" value="Índice de Margen Comercial"  onchange="mostrar_elemento(this, 'mostrar_indicadores')" />
+                                    <span></span>Índice de Margen<br>Comercial</label>
+                                
+                                <h5>Inventario</h5>
+                                <label class="checkbox">
+                                    <input type="checkbox" name="selected_indicadores" value="Uso de un Producto" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
+                                    <span></span>Uso de un Producto</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Margen Comercial" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
-                                    <span></span>Margen Comercial</label>
+                                    <input type="checkbox" name="selected_indicadores" value="Costo de un inventario promedio" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
+                                    <span></span>Costo de un inventario<br>promedio</label>
 
                                 <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Organismo" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
-                                    <span></span>Organismo</label>
-
-                                <label class="checkbox">
-                                    <input type="checkbox" name="selected_indicadores" value="Cobertura" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
-                                    <span></span>Cobertura</label>
+                                    <input type="checkbox" name="selected_indicadores" value="Costo de un inventario promedio límite" onchange="mostrar_elemento(this, 'mostrar_indicadores')"  />
+                                    <span></span>Costo de un inventario<br>promedio límite</label>
                             </div>
                         </div>
                     </div>
@@ -171,46 +173,59 @@
                                     <h3 class="card-label">Totales</h3>
                                 </div>
                             </div>
-                            <div class="checkbox-list card-body pt-4 pl-6 pr-6">
-                                <label class="checkbox">
-                                <input type="checkbox" name="selected_totales"  value="Departamento"  onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Departamento</label>
-
-                                <label class="checkbox">
-                                <input type="checkbox"   name="selected_totales" value="Sección" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
-                                <span></span>Sección</label>
-
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Línea" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Línea</label>
-
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Producto" onchange="mostrar_elemento(this, 'mostrar_ruptura')"  />
-                                <span></span>Producto</label>
-
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Proveedor" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Proveedor</label>
-
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Sucursal" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Sucursal</label>
-                                
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Complejo" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Complejo</label>
-                                    
-                                <label class="checkbox">
-                                <input type="checkbox"  name="selected_totales" value="Establecimiento" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Establecimiento</label>
-                                 
-                                <label class="checkbox">
-                                <input type="checkbox" name="selected_totales" value="Período" onchange="mostrar_elemento(this, 'mostrar_ruptura')" />
-                                <span></span>Período</label>
-                                
-                                <label class="checkbox">
-                                <input type="checkbox" name="selected_totales" value="Sistema Informático" onchange="mostrar_elemento(this, 'mostrar_metricas')" />
-                                <span></span>Sist. Informático</label>
+                            <div class="card-body pt-4 pl-6 pr-6">
+                                <div class="radio-list">
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Departamento"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Departamento')"></span>
+                                        Departamento
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Sección"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Sección')"></span>
+                                        Sección
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Línea"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Línea')"></span>
+                                        Línea
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Producto"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Producto')"></span>
+                                        Producto
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Proveedor"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Proveedor')"></span>
+                                        Proveedor
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Sucursal"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Sucursal')"></span>
+                                        Sucursal
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Complejo"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Complejo')"></span>
+                                        Complejo
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Establecimiento"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Establecimiento')"></span>
+                                        Establecimiento
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio" name="selected_totales" value="Período"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Período')"></span>
+                                        Período
+                                    </label>
+                                    <label class="radio radio-rounded">
+                                        <input type="radio"  name="selected_totales" value="Sist. Informático"/>
+                                        <span onchange="mostrar_elemento_ratio(this, 'mostrar_ruptura', 'Sist. Informático')"></span>
+                                        Sist. Informático
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -247,7 +262,7 @@
                                                         <span></span>
                                                         Período
                                                     </label>
-                                                    <input type="date" class="ml-4 mr-4 mb-6">
+                                                    <input type="date" id="fecha_periodo" class="ml-4 mr-4 mb-6" value="2022-12">
                                                     <label class="radio radio-rounded col-lg-5">
                                                         <input type="radio" name="seleccionar_periodo" value="Acumulado" />
                                                         <span></span>
