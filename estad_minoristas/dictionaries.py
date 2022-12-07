@@ -91,3 +91,8 @@ agrup_id =  {
     'Periodo' : 'periodo_id_ods',
 }
 
+calculo_indicadores =  {
+    'Utilidad' : ' (v.venta_importe - v.venta_costo)  as utilidad, ',
+    'Margen' : '(v.venta_importe / v.venta_costo) as margen, '
+}
+

@@ -37,8 +37,11 @@ def build_kwargs_filter(field, value):
     return {field:value}
 
 
-def build_select_q(id_detalle,id_total,proc,campos_a_mostrar):
-    return "SELECT " + campos_a_mostrar + proc[0] + '.' + id_detalle +  ', ' + proc[0] + '.' + id_total + ', '
+def build_select_q(id_detalle,id_total,proc,campos_a_mostrar,indicadores):
+    calculo_ind = ''
+    for ind in indicadores:
+       calculo_ind+= calculo_indicadores[ind]
+    return "SELECT " + campos_a_mostrar + proc[0] + '.' + id_detalle +  ', ' + proc[0] + '.' + id_total + ', ' + calculo_ind +'\n'
 
 def build_sum(dict_proc_metricas):
     result = ''
@@ -101,12 +104,12 @@ def build_fields_to_show(nivel_detalle,total):
         result+= alias_total + '.'+ campo + ', '
     return result
     
-def build_init_query(id_detalle,id_total, procesos_seleccionados,modelos,nivel_detallado,total):
+def build_init_query(id_detalle,id_total, procesos_seleccionados,modelos,nivel_detallado,total,indicadores):
     id_detalle = id_detalle +'_id' 
     id_total = id_total +'_id' 
     campos_a_mostrar = build_fields_to_show(nivel_detallado,total)
 
-    select = build_select_q(id_detalle,id_total,modelos[0][0],campos_a_mostrar)
+    select = build_select_q(id_detalle,id_total,modelos[0][0],campos_a_mostrar,indicadores)
     sum = build_sum(procesos_seleccionados)
     from_ = build_from(modelos[0][0],modelos[0][1])
     inner_join = build_inner_join(modelos,id_detalle)

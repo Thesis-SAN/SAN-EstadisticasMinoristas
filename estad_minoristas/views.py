@@ -36,6 +36,7 @@ def report(request):
         filtro_lin = request.POST.getlist("selected_fam_lin")
         filtro_dep = request.POST.getlist("selected_fam_dep")
         
+	indicadores = request.POST.getlist("selected_indicadores")
 
         #datos a mostrar del total
         modelo_total,datos_a_mostrar_total = get_model_detail(totales[0])
@@ -54,7 +55,7 @@ def report(request):
         id_detalle = get_id(nivel_detallado)
         id_total = get_id(totales[0])
         
-        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos)
+        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos,indicadores)
         print(query)
 
         q = my_custom_sql(query)
