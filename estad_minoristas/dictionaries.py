@@ -73,8 +73,8 @@ agrup = {
     'departamento' : ('familia','fam_id_oltp'),
     'Seccion' :  ('familia','fam_id_oltp'),
     'Linea' :  ('familia','fam_id_oltp'),
-    'Sucursal' : ('establecimiento', 'est_id_os'),
-    'Complejo' : ('establecimiento', 'est_id_os'),
+    'Sucursal' : ('establecimiento', 'est_id_ods'),
+    'Complejo' : ('establecimiento', 'est_id_ods'),
     'Proveedor' :('proveedor','prov_id_ods'),
     'Periodo' : ('periodo','periodo_id_ods'),
 }

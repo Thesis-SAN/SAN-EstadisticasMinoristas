@@ -39,3 +39,18 @@ function mostrar_elemento_radio(this_, m, value) {
     }
 }
 
+function ratio_selected(this_, dest_addr){
+    if (this_.hasChildNodes()) {
+        var children = this_.childNodes;
+        for (var i = 0; i < children.length; i++) {
+            // do something with each child as children[i]
+            // NOTE: List is live, adding or removing children will change the list
+            if(children[i].checked){
+                
+            }
+            else{
+
+            }
+        }
+    }
+}
