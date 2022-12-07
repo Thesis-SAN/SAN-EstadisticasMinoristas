@@ -73,8 +73,8 @@ agrup = {
     'departamento' : ('familia','fam_id_oltp'),
     'Seccion' :  ('familia','fam_id_oltp'),
     'Linea' :  ('familia','fam_id_oltp'),
-    'Sucursal' : ('establecimiento', 'est_id_os'),
-    'Complejo' : ('establecimiento', 'est_id_os'),
+    'Sucursal' : ('establecimiento', 'est_id_ods'),
+    'Complejo' : ('establecimiento', 'est_id_ods'),
     'Proveedor' :('proveedor','prov_id_ods'),
     'Periodo' : ('periodo','periodo_id_ods'),
 }
@@ -89,5 +89,10 @@ agrup_id =  {
     'Complejo' : 'est_id',
     'Proveedor' :'prov_id_ods',
     'Periodo' : 'periodo_id_ods',
+}
+
+calculo_indicadores =  {
+    'Utilidad' : ' (v.venta_importe - v.venta_costo)  as utilidad, ',
+    'Margen' : '(v.venta_importe / v.venta_costo) as margen, '
 }
 
