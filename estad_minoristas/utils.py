@@ -41,7 +41,7 @@ def build_select_q(id_detalle,id_total,proc,campos_a_mostrar,indicadores):
     calculo_ind = ''
     for ind in indicadores:
        calculo_ind+= calculo_indicadores[ind]
-    return "SELECT " + campos_a_mostrar + proc[0] + '.' + id_detalle +  ', ' + proc[0] + '.' + id_total + ', ' + calculo_ind +'\n'
+    return "SELECT " + campos_a_mostrar  + calculo_ind +'\n'
 
 def build_sum(dict_proc_metricas):
     result = ''
@@ -103,6 +103,15 @@ def build_fields_to_show(nivel_detalle,total):
     for campo in campos_a_mostrar_total:
         result+= alias_total + '.'+ campo + ', '
     return result
+
+def build_where(indicadores):
+    result = ''
+    if 'margen' in indicadores:
+        result+= ' WHERE v.venta_costo != 0 \n'
+    return result
+
+def build_order_by():
+    return ' ORDER BY p.prod_recno DESC \n'
     
 def build_init_query(id_detalle,id_total, procesos_seleccionados,modelos,nivel_detallado,total,indicadores):
     id_detalle = id_detalle +'_id' 
@@ -115,7 +124,9 @@ def build_init_query(id_detalle,id_total, procesos_seleccionados,modelos,nivel_d
     inner_join = build_inner_join(modelos,id_detalle)
     inner_join_nom = build_inner_join_nomenclator(nivel_detallado,total,modelos[0][0][0],[id_detalle,id_total])
     group_by = build_group_by(id_detalle,id_total,modelos[0][0],campos_a_mostrar)
-    return select + sum + from_ + inner_join + inner_join_nom + group_by + '\nLIMIT 10'
+    where = build_where(indicadores)
+    order_by = build_order_by()
+    return select + sum + from_ + inner_join + inner_join_nom+ where  + group_by + order_by + '\nLIMIT 100'
 
 def build_head_query():
     pass

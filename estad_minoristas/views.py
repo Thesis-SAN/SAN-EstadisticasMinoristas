@@ -133,7 +133,7 @@ def report(request):
         filtro_lin = request.POST.getlist("selected_fam_lin")
         filtro_dep = request.POST.getlist("selected_fam_dep")
         
-
+        indicadores = request.POST.getlist("selected_indicadores")
         #datos a mostrar del total
         #modelo_total,datos_a_mostrar_total = get_model_detail(totales[0])
         #query_datos_total = modelo_total.objects.values(*datos_a_mostrar_total).distinct()
@@ -157,7 +157,7 @@ def report(request):
         id_total = get_id(totales[0])
         
         #construir query
-        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos,nivel_detallado, totales[0])
+        query = build_init_query(id_detalle,id_total,procesos_seleccionados, modelos,nivel_detallado, totales[0],indicadores)
         print(query)
         
         # raw_query = modelo_1.objects.raw(query) 

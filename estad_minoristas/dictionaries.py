@@ -92,7 +92,7 @@ agrup_id =  {
 }
 
 calculo_indicadores =  {
-    'Utilidad' : ' (v.venta_importe - v.venta_costo)  as utilidad, ',
-    'Margen' : '(v.venta_importe / v.venta_costo) as margen, '
+    'utilidad': ' (SUM(v.venta_importe) - SUM(v.venta_costo))  as utilidad, ',
+    'margen' : '(SUM(v.venta_importe) / SUM(v.venta_costo)) as margen, '
 }
 
