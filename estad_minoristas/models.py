@@ -308,7 +308,6 @@ class Compra_Producto_Sucursal(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-
 class Inventario_Producto_Sucursal(models.Model):
     #key
     prod_id = models.ForeignKey(N_Producto,name = 'prod_id',on_delete=models.CASCADE)
@@ -316,7 +315,7 @@ class Inventario_Producto_Sucursal(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -354,9 +353,7 @@ class Ajuste_Producto_Sucursal(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
     
-
 class Transferencia_Producto_Sucursal(models.Model):
     #key
     
@@ -404,8 +401,6 @@ class Ventas_Producto_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-  
-
 class Compra_Producto_Complejo(models.Model):
     #key
     
@@ -425,7 +420,6 @@ class Compra_Producto_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
   
-
 class Inventario_Producto_Complejo(models.Model):
     #key
     
@@ -434,7 +428,7 @@ class Inventario_Producto_Complejo(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -473,7 +467,6 @@ class Ajuste_Producto_Complejo(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
  
-
 class Transferencia_Producto_Complejo(models.Model):
     #key
     
@@ -520,7 +513,6 @@ class Ventas_Linea_Establecimiento(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
 class Compra_Linea_Establecimiento(models.Model):
     #key
     
@@ -540,7 +532,6 @@ class Compra_Linea_Establecimiento(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-   
 class Inventario_Linea_Establecimiento(models.Model):
     #key
     
@@ -549,7 +540,7 @@ class Inventario_Linea_Establecimiento(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
 
@@ -663,7 +654,7 @@ class Inventario_Linea_Complejo(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -775,7 +766,7 @@ class Inventario_Linea_Sucursal(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -887,7 +878,7 @@ class Inventario_Departamento_Establecimiento(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -906,7 +897,6 @@ class Inventario_Departamento_Establecimiento(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
     area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
-
 
 class Ajuste_Departamento_Establecimiento(models.Model):
     #key
@@ -1000,7 +990,7 @@ class Inventario_Departamento_Complejo(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -1028,7 +1018,7 @@ class Ajuste_Departamento_Complejo(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -1038,7 +1028,6 @@ class Ajuste_Departamento_Complejo(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant =   models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
 
 class Transferencia_Departamento_Complejo(models.Model):
     #key
@@ -1086,7 +1075,6 @@ class Ventas_Departamento_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
 class Compra_Departamento_Sucursal(models.Model):
     #key
     
@@ -1106,7 +1094,6 @@ class Compra_Departamento_Sucursal(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-
 class Inventario_Departamento_Sucursal(models.Model):
     #key
     
@@ -1115,7 +1102,7 @@ class Inventario_Departamento_Sucursal(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -1134,7 +1121,6 @@ class Inventario_Departamento_Sucursal(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
     area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
-
 
 class Ajuste_Departamento_Sucursal(models.Model):
     #key
@@ -1228,7 +1214,7 @@ class Inventario_Seccion_Establecimiento(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
 
@@ -1248,7 +1234,6 @@ class Inventario_Seccion_Establecimiento(models.Model):
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
     area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
-
 
 class Ajuste_Seccion_Establecimiento(models.Model):
     #key
@@ -1343,7 +1328,7 @@ class Inventario_Seccion_Complejo(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
@@ -1455,7 +1440,7 @@ class Inventario_Seccion_Sucursal(models.Model):
     prov_id = models.ForeignKey(N_Proveedor,name = 'prov_id',on_delete=models.CASCADE)
     periodo_id = models.ForeignKey(N_Periodo,name= 'periodo_id',on_delete=models.CASCADE)
     act_id = models.ForeignKey(N_Actividad, name = 'act_id',on_delete=models.CASCADE)
-    area_tipo = models.ForeignKey(N_TipoArea, name='area_tipo',on_delete=models.CASCADE)
+    area_tipo_id = models.ForeignKey(N_TipoArea, name='area_tipo_id',on_delete=models.CASCADE,default = 0)
     tipo_cod_id = models.ForeignKey(N_TipoCodigo,name = "tipo_cod_id",on_delete=models.CASCADE)
 
     #attributes
