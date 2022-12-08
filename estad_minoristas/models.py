@@ -289,8 +289,6 @@ class Ventas_Producto_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True) 
 
-   
-
 class Compra_Producto_Sucursal(models.Model):
     #key
     
@@ -336,7 +334,7 @@ class Inventario_Producto_Sucursal(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Producto_Sucursal(models.Model):
     #key
@@ -426,7 +424,6 @@ class Compra_Producto_Complejo(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
   
 
 class Inventario_Producto_Complejo(models.Model):
@@ -455,8 +452,7 @@ class Inventario_Producto_Complejo(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Producto_Complejo(models.Model):
     #key
@@ -476,7 +472,6 @@ class Ajuste_Producto_Complejo(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
  
 
 class Transferencia_Producto_Complejo(models.Model):
@@ -573,8 +568,7 @@ class Inventario_Linea_Establecimiento(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Linea_Establecimiento(models.Model):
     #key
@@ -596,8 +590,8 @@ class Ajuste_Linea_Establecimiento(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
-
 class Transferencia_Linea_Establecimiento(models.Model):
+
     #key
     
     fam_id = models.ForeignKey(N_Familia,name = 'familia',on_delete=models.CASCADE, default = '')
@@ -613,8 +607,6 @@ class Transferencia_Linea_Establecimiento(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-
 
 #Linea_Complejo
 class Ventas_Linea_Complejo(models.Model):
@@ -644,7 +636,6 @@ class Ventas_Linea_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
 class Compra_Linea_Complejo(models.Model):
     #key
     
@@ -664,7 +655,6 @@ class Compra_Linea_Complejo(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
- 
 class Inventario_Linea_Complejo(models.Model):
     #key
     
@@ -691,7 +681,7 @@ class Inventario_Linea_Complejo(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Linea_Complejo(models.Model):
     #key
@@ -712,8 +702,6 @@ class Ajuste_Linea_Complejo(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
- 
-
 class Transferencia_Linea_Complejo(models.Model):
     #key
     
@@ -730,8 +718,6 @@ class Transferencia_Linea_Complejo(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
-
 
 
 #Linea_Sucursal
@@ -761,7 +747,6 @@ class Ventas_Linea_Sucursal(models.Model):
     importe_anno_anterior = models.FloatField(name='venta_anno_ant_importe',null = True)
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
-
 
 class Compra_Linea_Sucursal(models.Model):
     #key
@@ -808,8 +793,7 @@ class Inventario_Linea_Sucursal(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Linea_Sucursal(models.Model):
     #key
@@ -830,8 +814,6 @@ class Ajuste_Linea_Sucursal(models.Model):
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
 
- 
-
 class Transferencia_Linea_Sucursal(models.Model):
     #key
     
@@ -848,7 +830,6 @@ class Transferencia_Linea_Sucursal(models.Model):
     costo = models.FloatField(name ='transf_costo',null=True)
     cantidad_anno_ant = models.FloatField(name='transf_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
-
 
 
 #Departamento_Establecimiento
@@ -898,7 +879,6 @@ class Compra_Departamento_Establecimiento(models.Model):
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
 
-
 class Inventario_Departamento_Establecimiento(models.Model):
     #key
     
@@ -925,6 +905,7 @@ class Inventario_Departamento_Establecimiento(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 
 class Ajuste_Departamento_Establecimiento(models.Model):
@@ -945,8 +926,6 @@ class Ajuste_Departamento_Establecimiento(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
-
 
 class Transferencia_Departamento_Establecimiento(models.Model):
     #key
@@ -994,7 +973,6 @@ class Ventas_Departamento_Complejo(models.Model):
     importe_nacional =  models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
 class Compra_Departamento_Complejo(models.Model):
     #key
     
@@ -1013,7 +991,6 @@ class Compra_Departamento_Complejo(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
 
 class Inventario_Departamento_Complejo(models.Model):
     #key
@@ -1041,8 +1018,7 @@ class Inventario_Departamento_Complejo(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Departamento_Complejo(models.Model):
     #key
@@ -1157,6 +1133,7 @@ class Inventario_Departamento_Sucursal(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 
 class Ajuste_Departamento_Sucursal(models.Model):
@@ -1224,8 +1201,6 @@ class Ventas_Seccion_Establecimiento(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-  
-
 class Compra_Seccion_Establecimiento(models.Model):
     #key
     
@@ -1244,7 +1219,6 @@ class Compra_Seccion_Establecimiento(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
 
 class Inventario_Seccion_Establecimiento(models.Model):
     #key
@@ -1273,6 +1247,7 @@ class Inventario_Seccion_Establecimiento(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 
 class Ajuste_Seccion_Establecimiento(models.Model):
@@ -1313,7 +1288,6 @@ class Transferencia_Seccion_Establecimiento(models.Model):
     costo_anno_ant = models.FloatField(name ='transf_anno_ant_costo',null=True)
 
 
-
 #Seccion_Complejo
 class Ventas_Seccion_Complejo(models.Model):
     #key
@@ -1342,8 +1316,6 @@ class Ventas_Seccion_Complejo(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
-
 class Compra_Seccion_Complejo(models.Model):
     #key
     
@@ -1362,8 +1334,6 @@ class Compra_Seccion_Complejo(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
-
 
 class Inventario_Seccion_Complejo(models.Model):
     #key
@@ -1391,7 +1361,7 @@ class Inventario_Seccion_Complejo(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Seccion_Complejo(models.Model):
     #key
@@ -1411,8 +1381,6 @@ class Ajuste_Seccion_Complejo(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
- 
 
 class Transferencia_Seccion_Complejo(models.Model):
     #key
@@ -1460,7 +1428,6 @@ class Ventas_Seccion_Sucursal(models.Model):
     importe_nacional = models.FloatField(name = 'venta_importe_nacional',null = True) 
     importe_nacional_anno_ant = models.FloatField(name = 'venta_anno_ant_importe_nacional',null = True)
 
-
 class Compra_Seccion_Sucursal(models.Model):
     #key
     
@@ -1479,8 +1446,6 @@ class Compra_Seccion_Sucursal(models.Model):
     costo_anno_anterior = models.FloatField(name='compra_anno_ant_costo',null = True)
     costo_nacional= models.FloatField(name = 'compra_costo_nacional',null = True)
     costo_nacional_anno_ant = models.FloatField(name = 'compra_anno_ant_costo_nacional',null = True)
-
-
 
 class Inventario_Seccion_Sucursal(models.Model):
     #key
@@ -1508,7 +1473,7 @@ class Inventario_Seccion_Sucursal(models.Model):
     uso_semestre= models.FloatField(name='inv_semestre_uso',null = True)
     cant_anno_anterior = models.FloatField(name='inv_anno_ant_cantidad',null = True)
     costo_anno_anterior = models.FloatField(name='inv_anno_ant_costo',null = True)
-
+    area_tipo =  models.CharField(name = 'area_tipo', max_length= 12,null = True, default = '' )
 
 class Ajuste_Seccion_Sucursal(models.Model):
     #key
@@ -1528,8 +1493,6 @@ class Ajuste_Seccion_Sucursal(models.Model):
     cantidad_anno_ant = models.FloatField(name='ajuste_anno_ant_cantidad',max_length=53)
     costo_anno_ant = models.FloatField(name ='ajuste_anno_ant_costo',null=True)
     importe_anno_ant = models.FloatField(name ='ajuste_anno_ant_importe',null=True)
-
-
 
 class Transferencia_Seccion_Sucursal(models.Model):
     #key
